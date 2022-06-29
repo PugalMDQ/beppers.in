@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mdq.social">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".app.data.app.AppController"
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/ic_logo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/ic_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".ui.listForChat.ListForChat"
+            android:exported="true" />
+        <activity
+            android:name=".ui.listOfPost.ListOfPost"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Comments.Comments"
+            android:exported="true" />
+        <activity
+            android:name=".ui.addpost.selctedImages"
+            android:exported="true" />
+        <activity
+            android:name=".ui.BioMetrix.BioMetrix"
+            android:exported="true" />
+        <activity
+            android:name=".ui.resetpassword.OTPVerify"
+            android:exported="true" />
+        <activity
+            android:name=".ui.resetpassword.MoblieNumAdOtp"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Security.Security"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.Carousel.Carousel"
+            android:exported="true" />
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+
+
+
+        <activity android:name=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signup.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.addadmin.AddAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signupselection.SignUpSelectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signupfreelancer.SignUpFreelancerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signupbusiness.SignUpBusinessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.post.PostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.selectedpost.SelectedPostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.addpost.AddpostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.livechat.LiveChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.notification.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.resetpassword.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.otp.OtpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.forgot.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.bookmark.BookMarkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.pendingrequest.PendingRequestActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.follow.FollowActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.blockaccount.BlockAccountActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.notificationsetting.NotificationSettingActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.help.HelpActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.blockcomment.BlockCommentActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.privacy.PrivacyActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.individual.IndividualActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.freelanceupdate.FreelanceUpdateActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.businessupdate.BusinessUpdateActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.reviewlist.ReviewListActivity"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".ui.Firebase.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="false"
+            android:directBootAware="true"
+            android:stopWithTask="false"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name=".app.helper.upload.EasyImageFileProvider"
+            android:authorities="com.zoodly.social.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

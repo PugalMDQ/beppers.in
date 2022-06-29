@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.mdq.social.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.mdq.social.ui.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_add"
+        android:name="com.mdq.social.ui.add.AddFragment"
+        android:label="Upload"
+        tools:layout="@layout/fragment_added" />
+
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.mdq.social.ui.chat.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.mdq.social.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_search_details"
+        android:name="com.mdq.social.ui.searchdetails.SearchDetailsFragment"
+        android:label="Search Details"
+        tools:layout="@layout/fragment_search_details" />
+
+
+    <fragment
+        android:id="@+id/navigation_freelancer"
+        android:name="com.mdq.social.ui.freelancer.FreelancerFragment"
+        android:label="Freelancer"
+        tools:layout="@layout/fragment_freelancer" />
+
+    <fragment
+        android:id="@+id/navigation_bussiness"
+        android:name="com.mdq.social.ui.business.BusinessProfileFragment"
+        android:label="Business"
+        tools:layout="@layout/fragment_business" />
+
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.mdq.social.ui.notification.NotificationActivity"
+        android:label="Notification"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/navigation_rateus"
+        android:name="com.mdq.social.ui.rate.RateUsFragment"
+        android:label="RateUs"
+        tools:layout="@layout/fragment_rateus" />
+
+</navigation>

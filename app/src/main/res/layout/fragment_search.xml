@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="searchViewModel"
+            type="com.mdq.social.app.data.viewmodels.search.SearchViewModel" />
+
+        <variable
+            name="exploreAdapter"
+            type="com.mdq.social.ui.search.ExploreAdapter" />
+
+        <variable
+            name="trendingAdapter"
+            type="com.mdq.social.ui.search.TrendingAdapter" />
+
+        <variable
+            name="recommendedAdapter"
+            type="com.mdq.social.ui.search.RecommendedAdapter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/bg_gradiant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView89"
+            style="@style/text_style_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/explore"
+            android:textColor="@color/white"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout7" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/ns_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#1E1F23"
+                >
+
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/bg_login_back"
+                    android:drawableLeft="@drawable/ic_search"
+                    android:drawablePadding="5dp"
+                    android:ems="10"
+                    android:onClick="@{()->searchViewModel.searchClick()}"
+                    android:focusable="false"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:text="@string/search"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_trend"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:adapter="@{trendingAdapter}"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    android:nestedScrollingEnabled="false"
+                    android:focusableInTouchMode="true"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName14"
+                    app:spanCount="2"
+                    tools:listitem="@layout/item_trending" />
+
+
+                <include
+                    android:id="@+id/in_category"
+                    layout="@layout/norecords"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName14" />
+
+                <include
+                    android:id="@+id/in_tranding"
+                    layout="@layout/norecords"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/rv_trend"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/rv_trend" />
+
+                <include
+                    android:id="@+id/in_recommed"
+                    layout="@layout/norecords"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+        <TextView
+            android:id="@+id/blockText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Admin Blocked You...\n reach Beppers team..."
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gilroyextrabold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BlockImage"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/BlockImage"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:srcCompat="@drawable/ic_no_more_data" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

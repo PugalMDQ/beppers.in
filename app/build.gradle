@@ -1,0 +1,181 @@
+ plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.mdq.social"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 2
+        versionName "1.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    android {
+        signingConfigs {
+            certificate {
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.certificate
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    dataBinding{
+        enabled true
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+    }
+    buildToolsVersion '30.0.3'
+
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.2'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.2'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+
+    /*Kotlin Support*/
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$CoroutinesCoreVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$CoroutinesCoreVersion"
+
+    /*BioMetric authendication*/
+    implementation("androidx.biometric:biometric:1.1.0")
+
+    /*ImageSlider*/
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
+    /*Shimmer effect in recycler view*/
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    /*Android Support*/
+    implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta04'
+    implementation "com.google.android.gms:play-services-safetynet:17.0.1"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerviewVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacy"
+    implementation "com.android.support:support-core-utils:$supportVersion"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.cardview:cardview:$legacy"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.2'
+    implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.6'
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test:runner:$runnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
+    implementation 'com.android.volley:volley:1.1.1'
+
+    /*Glide*/
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glideOkHttpVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    /*Android ViewModel*/
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleversion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleversion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycleversion"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleversion"
+    annotationProcessor "androidx.databinding:databinding-compiler:$databindingCompilerVersion"
+
+    /*RxJava - RxAndroid*/
+    implementation "io.reactivex:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex:rxjava:$rxJavaVersion"
+    implementation "com.artemzin.rxjava:proguard-rules:$rxRulesVersion"
+    implementation "io.reactivex:rxjava-math:$rxRulesMath"
+
+    /*Retrofit*/
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitConverterVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitConverterVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpLoggingVersion"
+
+    /*Dagger 2*/
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerCompileVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerSupportVersions"
+    kapt "com.google.dagger:dagger-android-processor:$daggerProcessorVersion"
+
+    /*Otto - Event Bus*/
+    implementation "com.squareup:otto:$eventBusVersion"
+
+    /*Multidex*/
+    implementation "androidx.multidex:multidex:$multidexVersion"
+
+    /*Roundedimageview*/
+    implementation 'com.rishabhharit.roundedimageview:RoundedImageView:0.8.4'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
+    implementation 'com.github.a914-gowtham:android-video-trimmer:1.7.0'
+
+    /*Sliding Root nav*/
+    implementation 'com.yarolegovich:sliding-root-nav:1.1.0'
+    implementation 'com.karumi:dexter:6.2.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.14.1'
+
+    /*Showhidepasswordedittext*/
+    implementation 'com.github.scottyab:showhidepasswordedittext:0.8'
+
+    /*Pin*/
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2'
+
+    implementation "com.google.android.gms:play-services-auth:${fcm_authu}"
+    implementation 'com.google.firebase:firebase-auth:20.0.3'
+    implementation 'id.zelory:compressor:3.0.1'
+    implementation 'com.allattentionhere:autoplayvideos:0.2.0'
+    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
+
+        //For country code picker
+        implementation 'com.github.joielechong:countrycodepicker:2.4.2'
+
+    //For image zooming
+    implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
+
+    // Groupie - for complex recycler views
+    implementation "com.xwray:groupie:2.1.0"
+
+    }

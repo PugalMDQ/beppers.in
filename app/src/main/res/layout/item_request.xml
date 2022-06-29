@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="reviewItem"
+            type="com.mdq.social.app.data.response.user_profile.ReviewsItem" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+
+                <com.github.siyamed.shapeimageview.CircularImageView
+                    android:id="@+id/imageView51"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/images"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView136"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Steffany"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/gilroyextrabold"
+                    app:layout_constraintStart_toEndOf="@+id/imageView51"
+                    app:layout_constraintTop_toTopOf="@+id/imageView51" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/textView136"
+                    app:layout_constraintTop_toBottomOf="@+id/textView136"
+                    android:text="wants to network with you."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:id="@+id/connection"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/gilroylight"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/connection"
+                    app:layout_constraintTop_toTopOf="@+id/textView136"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:weightSum="2"
+                    android:orientation="vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:text="Accept"
+                        android:gravity="center"
+                        android:fontFamily="@font/gilroy_regular"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="2dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/cl_accept"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/bg_confirm"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:text="Ignore"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/gilroy_regular"
+                        android:textSize="14sp"
+                        android:layout_marginTop="2dp"
+                        android:id="@+id/cl_decline"
+                        android:background="@drawable/bg_confirm"/>
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

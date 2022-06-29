@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="dataItem"
+            type="com.mdq.social.app.data.response.livechatprofile.DataItem" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:id="@+id/imageView43"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/noprofile" />
+
+        <TextView
+            android:id="@+id/textView118"
+            style="@style/text_style_black_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView119"
+            app:layout_constraintEnd_toStartOf="@+id/textView120"
+            app:layout_constraintStart_toEndOf="@+id/imageView43"
+            app:layout_constraintTop_toTopOf="@+id/imageView43"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView119"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:fontFamily="@font/gilroylight"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView43"
+            app:layout_constraintEnd_toStartOf="@+id/textView121"
+            app:layout_constraintStart_toStartOf="@+id/textView118"
+            app:layout_constraintTop_toBottomOf="@+id/textView118" />
+
+        <TextView
+            android:id="@+id/textView120"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="04:15"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:fontFamily="@font/gilroylight"
+            app:layout_constraintBottom_toBottomOf="@+id/textView118"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView118"
+            app:layout_constraintTop_toTopOf="@+id/textView118" />
+
+        <TextView
+            android:id="@+id/textView121"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/ic_baseline_mode_comment_24"
+            android:textSize="10sp"
+            android:paddingBottom="4dp"
+            android:fontFamily="@font/gilroyextrabold"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/textView119"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView119"
+            app:layout_constraintTop_toTopOf="@+id/textView119" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

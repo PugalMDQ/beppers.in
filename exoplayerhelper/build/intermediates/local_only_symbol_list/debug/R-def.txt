@@ -1,0 +1,23 @@
+R_DEF: Internal format may change without notice
+local
+color bufferedColor
+color playedColor
+color progressBarColor
+color scrubberColor
+color unplayedColor
+drawable ic_action_fullscreen
+drawable ic_action_mute
+drawable ic_action_volume_up
+drawable pause_btn
+drawable play_btn_big
+id bottom_progress
+id btnFullScreen
+id btnMute
+id progressBar
+id thumbImg
+layout exo_playback_control_view
+string app_name
+string error_instantiating_decoder
+string error_no_decoder
+string error_no_secure_decoder
+string error_querying_decoders

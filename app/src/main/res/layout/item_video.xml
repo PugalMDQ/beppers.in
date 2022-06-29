@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="responseDataItem"
+            type="com.mdq.social.app.data.response.getshopAlbumDetails.VediosItem" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.rishabhharit.roundedimageview.RoundedImageView
+            android:id="@+id/imageView31"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/leeminho"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView107"
+            style="@style/text_style_black_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@{responseDataItem.title.toString()}"
+            app:layout_constraintBottom_toTopOf="@+id/imageView36"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView31"
+            app:layout_constraintTop_toTopOf="@+id/imageView31" />
+
+
+
+        <ImageView
+            android:id="@+id/imageView36"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView31"
+            app:layout_constraintStart_toStartOf="@+id/textView107"
+            app:layout_constraintTop_toBottomOf="@+id/textView107"
+            app:srcCompat="@drawable/ic_user" />
+
+        <TextView
+            android:id="@+id/textView109"
+            style="@style/text_style_bold_light_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="04:39"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView36"
+            app:layout_constraintStart_toEndOf="@+id/imageView36"
+            app:layout_constraintTop_toTopOf="@+id/imageView36" />
+
+        <ImageView
+            android:id="@+id/imageView37"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView36"
+            app:layout_constraintStart_toEndOf="@+id/textView109"
+            app:layout_constraintTop_toTopOf="@+id/imageView36"
+            app:srcCompat="@drawable/ic_user" />
+
+        <TextView
+            android:id="@+id/textView110"
+            style="@style/text_style_bold_light_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@{responseDataItem.totalViewCount.toString()}"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView37"
+            app:layout_constraintStart_toEndOf="@+id/imageView37"
+            app:layout_constraintTop_toTopOf="@+id/imageView37" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="forgotPasswordViewModel"
+            type="com.mdq.social.app.data.viewmodels.forgot.ForgotPasswordViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:onClick="@{()->forgotPasswordViewModel.loginClick(4)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_button" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/text_style_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/reset_password"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/textView80"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/enter_the_email_associated_with_your_account_and_we_ll_send_an_email_with_instructions_to_reset_your_password"
+            style="@style/text_style_normal_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView83"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/mobile_numbers"
+            style="@style/text_style_bold_title"
+            app:layout_constraintStart_toStartOf="@+id/textView80"
+            app:layout_constraintTop_toBottomOf="@+id/textView80" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            style="@style/text_style_bold_small_title"
+            android:background="@drawable/bg_login_back"
+            android:hint="@string/enter_mobile"
+            android:padding="20dp"
+            android:text="@={forgotPasswordViewModel.mobile}"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="@+id/textView80"
+            app:layout_constraintStart_toStartOf="@+id/textView83"
+            app:layout_constraintTop_toBottomOf="@+id/textView83" />
+
+        <TextView
+            android:id="@+id/textView84"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_logins"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="@string/send_instructions"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:onClick="@{()->forgotPasswordViewModel.loginClick(1)}"
+            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName16"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName16"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName16" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

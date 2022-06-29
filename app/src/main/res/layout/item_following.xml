@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="reviewItem"
+            type="com.mdq.social.app.data.response.user_profile.ReviewsItem" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content">
+
+
+                    <com.github.siyamed.shapeimageview.CircularImageView
+                        android:id="@+id/imageView52"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/noprofile"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/textView76"
+                        style="@style/text_style_bold_small_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="100dp"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/imageView52"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView79"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="you following"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/gilroy_regular"
+                        app:layout_constraintEnd_toEndOf="@+id/textView76"
+                        app:layout_constraintStart_toStartOf="@+id/textView76"
+                        app:layout_constraintTop_toBottomOf="@+id/textView76" />
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:text="Unfollow"
+                        android:gravity="center"
+                        android:id="@+id/cl_decline"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2.5dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/gilroylight"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/cl_Block"
+                        android:background="@drawable/bg_logins"/>
+
+                    <TextView
+                        android:id="@+id/cl_Block"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/bg_logins"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/gilroylight"
+                        android:textColor="@color/white"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Block"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cl_decline" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </layout>

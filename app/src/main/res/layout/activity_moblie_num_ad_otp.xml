@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.resetpassword.MoblieNumAdOtp"
+        android:background="#1E1F23">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/bg_gradiant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_button" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/text_style_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Reset Password"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OTP will be sent to this number"
+                app:layout_constraintStart_toStartOf="@+id/mobileNum"
+                android:layout_marginLeft="24dp"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
+                android:fontFamily="@font/gilroy_regular"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/white"
+                android:id="@+id/txt"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:inputType="number"
+                android:maxLength="10"
+                android:fontFamily="@font/gilroylight"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:id="@+id/mobileNum"
+                app:layout_constraintTop_toBottomOf="@+id/txt"
+                android:background="@drawable/bg_login_back"
+                android:layout_marginLeft="24dp"
+                android:padding="20dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/SEND"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Send OTP"
+                android:gravity="start|center_vertical"
+                android:textSize="16dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:background="@drawable/ripple_otp"
+                android:drawableRight="@drawable/ic_baseline_chevron_right_24"
+                android:fontFamily="@font/gilroyextrabold"
+                app:layout_constraintTop_toBottomOf="@+id/mobileNum"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter your six digit OTP shared"
+                app:layout_constraintTop_toBottomOf="@+id/SEND"
+                app:layout_constraintStart_toStartOf="@+id/SEND"
+                android:layout_marginLeft="24dp"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColorHint="@color/white"
+                android:id="@+id/txt1"
+                />
+
+            <EditText
+                android:id="@+id/Otp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter OTP"
+                android:gravity="start|center_vertical"
+                android:textSize="14dp"
+                android:padding="20dp"
+                android:visibility="gone"
+                android:background="@drawable/bg_login_back"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/txt1"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp" />
+
+            <TextView
+                android:id="@+id/Verify"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Verify"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:visibility="gone"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_logins"
+                android:fontFamily="@font/robotobold"
+                app:layout_constraintTop_toBottomOf="@+id/Otp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

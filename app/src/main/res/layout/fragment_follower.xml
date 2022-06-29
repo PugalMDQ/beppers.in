@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="followerViewModel"
+            type="com.mdq.social.app.data.viewmodels.follower.FollowerViewModel" />
+
+        <variable
+            name="followerAdapter"
+            type="com.mdq.social.ui.follow.FollowerAdapter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_login_back"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:visibility="gone"
+            android:hint="@string/search"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_follower"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+             android:adapter="@{followerAdapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName15"
+            tools:listitem="@layout/item_follower" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

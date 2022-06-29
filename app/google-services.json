@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1048028913338",
+    "firebase_url": "https://makeover-f27bb-default-rtdb.firebaseio.com",
+    "project_id": "makeover-f27bb",
+    "storage_bucket": "makeover-f27bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048028913338:android:ac9bf647e402e24c15ec83",
+        "android_client_info": {
+          "package_name": "com.mdq.social"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048028913338-gdn15n365e2e7lc6nrp9s54vf8h8lvrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCflGJDHrmlLjbKRPl2alTp7IhssKTNJ3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048028913338-gdn15n365e2e7lc6nrp9s54vf8h8lvrm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

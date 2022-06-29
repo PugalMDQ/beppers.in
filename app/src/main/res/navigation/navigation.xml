@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<!--    app:startDestination="@id/nav_home">-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_home"-->
+<!--        android:name="com.fasttrack.owner.ui.home.HomeFragment"-->
+<!--        android:label="Home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_collection_report"-->
+<!--        android:name="com.fasttrack.owner.ui.collectionreport.CollectionRepportFrgment"-->
+<!--        android:label="CollectionReport"-->
+<!--        tools:layout="@layout/fragment_collection_report" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_credit_bill"-->
+<!--        android:name="com.fasttrack.owner.ui.creditbillreport.CreditBillReportFragment"-->
+<!--        android:label="CreditBillReport"-->
+<!--        tools:layout="@layout/fragment_credit_bill" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_driver_info"-->
+<!--        android:name="com.fasttrack.owner.ui.driverinfo.DriverInfoFragment"-->
+<!--        android:label="Vehicle&amp;DriverInfo"-->
+<!--        tools:layout="@layout/fragment_driver_info" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_vehiclereport"-->
+<!--        android:name="com.fasttrack.owner.ui.vehiclereport.VehicleReportFragment"-->
+<!--        android:label="VehicleReport"-->
+<!--        tools:layout="@layout/fragment_vehiclereport" />-->
+
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_tracking"-->
+<!--        android:name="com.fasttrack.owner.ui.tracking.VehicleTrackingFragment"-->
+<!--        android:label="VehicleTracking"-->
+<!--        tools:layout="@layout/fragment_tracking" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_recharge"-->
+<!--        android:name="com.fasttrack.owner.ui.recharge.RechargeFragment"-->
+<!--        android:label="Amount Recharge"-->
+<!--        tools:layout="@layout/fragment_amount_recharge" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_recharge_details"-->
+<!--        android:name="com.fasttrack.owner.ui.paymentdetails.PaymentDetailsFragment"-->
+<!--        android:label="Vehicle Recharge Details"-->
+<!--        tools:layout="@layout/fragment_payment_details" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_cashback"-->
+<!--        android:name="com.fasttrack.owner.ui.cashback.CashBackFragment"-->
+<!--        android:label="CashBack"-->
+<!--        tools:layout="@layout/fragment_cashback" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_fincollection"-->
+<!--        android:name="com.fasttrack.owner.ui.finecollection.FineCollectionFragment"-->
+<!--        android:label="FineCollection"-->
+<!--        tools:layout="@layout/fragment_fincollection" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_vehicle_log"-->
+<!--        android:name="com.fasttrack.owner.ui.vehiclelog.VehicleLogFragment"-->
+<!--        android:label="VehicleLog"-->
+<!--        tools:layout="@layout/fragment_vehicle_log" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_change_password"-->
+<!--        android:name="com.fasttrack.owner.ui.changepassword.ChangePasswordFragment"-->
+<!--        android:label="ChangePassword"-->
+<!--        tools:layout="@layout/fragment_change_password" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_empty"-->
+<!--        android:name="com.fasttrack.owner.ui.empty.EmptyFragment"-->
+<!--        android:label="Empty Charges"-->
+<!--        tools:layout="@layout/fragment_empty" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_cancel"-->
+<!--        android:name="com.fasttrack.owner.ui.canceldetails.CancelDetailFragment"-->
+<!--        android:label="Cancel Charges"-->
+<!--        tools:layout="@layout/fragment_cancel" />-->
+
+<!--    <dialog-->
+<!--        android:id="@+id/nav_logout"-->
+<!--        android:name="com.fasttrack.owner.ui.logout.LogoutFragment"-->
+<!--        android:label="ChangePassword"-->
+<!--        tools:layout="@layout/dialog_logout" />-->
+
+
+</navigation>
+

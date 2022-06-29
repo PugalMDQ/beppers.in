@@ -1,0 +1,184 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--<item name="colorAccent">@color/colorAccent</item>-->
+    <!--</style>-->
+
+    <!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+    <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--        <item name="colorAccent">@color/colorAccent</item>-->
+    <!--        <item name="fontFamily">@font/lato</item>-->
+    <!--    </style>-->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/status_bar</item>
+        <item name="colorPrimaryDark">@color/status_bar</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="ThemeOverlay.AppCompat.navTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="colorControlHighlight">@color/view_update</item>
+    </style>
+
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.NoActinBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActinBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="EditTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+    </style>
+
+    <style name="ButtonAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="customtabstyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Theme.BD_Dialog" parent="android:style/Theme.Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="tab_texts" parent="@android:style/TextAppearance.Small">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="dialog_center" parent="android:Theme.Holo.Light">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeHome" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Toolbar.TitleTextHome" parent="TextAppearance.Widget.AppCompat.Toolbar.Title" tools:ignore="DuplicateDefinition">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/white</item>
+
+    </style>
+
+    <style name="text_style_bold">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/gilroyextrabold</item>
+    </style>
+
+    <style name="text_style_normal">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/black</item>
+
+    </style>
+
+    <style name="text_style_high_normal">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_style_bold_light">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/txt_clour</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_style_bold_light_small">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">normal</item>
+
+    </style>
+
+    <style name="text_style_bold_title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="fontFamily">@font/gilroyextrabold</item>
+    </style>
+
+    <style name="text_style_bold_small_title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">@font/gilroylight</item>
+    </style>
+
+    <style name="text_style_black_title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="fontFamily">@font/gilroyextrabold</item>
+    </style>
+
+    <style name="text_style_normal_title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/txt_clour</item>
+        <item name="fontFamily">@font/gilroylight</item>
+    </style>
+
+    <style name="text_style_bold_smaill_title">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_style_normal_titles">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/txt_clour</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="text_style_bolds_title_white">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/gilroyextrabold</item>
+    </style>
+
+    <style name="text_style_bolds_light_white">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/txt_clours</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/gilroylight</item>
+    </style>
+
+    <style name="AppTheme_Chip" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="tabstyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/gilroylight</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+</resources>

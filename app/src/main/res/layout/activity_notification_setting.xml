@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="notificationSettingViewModel"
+            type="com.mdq.social.app.data.viewmodels.notificationsetting.NotificationSettingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1E1F23">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/bg_gradiant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitXY"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->notificationSettingViewModel.onClick(1)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_button" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/text_style_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/notification"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+        <TextView
+            android:id="@+id/textView143"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/likes_and_comments"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gilroylight"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{()->notificationSettingViewModel.onClick(2)}"
+            android:layout_gravity="center"
+            android:checked="true"
+            app:track="@drawable/custom_switch_track"
+            android:thumb="@drawable/custom_switch_key"
+            app:layout_constraintBottom_toBottomOf="@+id/textView143"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView143"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <View
+            android:id="@+id/view11"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/viewColor"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView143" />
+
+        <TextView
+            android:id="@+id/textView144"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/messages"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gilroylight"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView143"
+            app:layout_constraintTop_toBottomOf="@+id/view11" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:track="@drawable/custom_switch_track"
+            android:thumb="@drawable/custom_switch_key"
+            android:checked="true"
+            android:onClick="@{()->notificationSettingViewModel.onClick(3)}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView144"
+            app:layout_constraintEnd_toEndOf="@+id/switch1"
+            app:layout_constraintTop_toTopOf="@+id/textView144"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
+
+        <View
+            android:id="@+id/view12"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/viewColor"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView144" />
+
+        <TextView
+            android:id="@+id/textView145"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/post"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gilroylight"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView144"
+            app:layout_constraintTop_toBottomOf="@+id/view12" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:track="@drawable/custom_switch_track"
+            android:checked="true"
+            android:thumb="@drawable/custom_switch_key"
+            android:onClick="@{()->notificationSettingViewModel.onClick(4)}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView145"
+            app:layout_constraintEnd_toEndOf="@+id/switch2"
+            app:layout_constraintTop_toTopOf="@+id/textView145"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
+
+        <View
+            android:id="@+id/view13"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/viewColor"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView145" />
+
+        <TextView
+            android:id="@+id/textView146"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/follower_requests"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gilroylight"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView145"
+            app:layout_constraintTop_toBottomOf="@+id/view13" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:track="@drawable/custom_switch_track"
+            android:thumb="@drawable/custom_switch_key"
+            android:onClick="@{()->notificationSettingViewModel.onClick(5)}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView146"
+            app:layout_constraintEnd_toEndOf="@+id/switch3"
+            app:layout_constraintTop_toTopOf="@+id/textView146"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
+
+        <View
+            android:id="@+id/view14"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/viewColor"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView146" />
+
+        <TextView
+            android:id="@+id/textView147"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Follower Acceptance"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gilroylight"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView146"
+            app:layout_constraintTop_toBottomOf="@+id/view14" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:track="@drawable/custom_switch_track"
+            android:thumb="@drawable/custom_switch_key"
+            android:onClick="@{()->notificationSettingViewModel.onClick(6)}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView147"
+            app:layout_constraintEnd_toEndOf="@+id/switch4"
+            app:layout_constraintTop_toTopOf="@+id/textView147"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
+
+<!--        <View-->
+<!--            android:id="@+id/view15"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView147" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

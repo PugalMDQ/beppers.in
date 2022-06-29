@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dataItem"
+            type="com.mdq.social.app.data.response.livechat.DataItem" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1E1F23">
+
+        <TextView
+            android:id="@+id/textView68"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_chat"
+            android:breakStrategy="simple"
+            android:fontFamily="@font/gilroy_regular"
+            android:padding="15dp"
+            android:scrollHorizontally="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/FROM_DATE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView68"
+            android:layout_alignRight="@+id/textView68"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/gilroylight"
+            />
+
+        <TextView
+            android:id="@+id/textView72"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/FROM_DATE"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_live_chat"
+            android:fontFamily="@font/gilroy_regular"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FROM_DATE" />
+
+        <TextView
+            android:id="@+id/TO_DATE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView72"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/gilroylight"
+            android:layout_alignLeft="@+id/textView72"
+            android:textColor="@color/white"
+
+           />
+    </RelativeLayout>
+
+</layout>

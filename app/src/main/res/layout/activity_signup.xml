@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="signupViewModel"
+            type="com.mdq.social.app.data.viewmodels.signup.SignupViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#1E1F23">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout7"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:background="@drawable/bg_gradiant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="14dp"
+                    android:onClick="@{()->signupViewModel.backOnClick()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_back_button" />
+                <ImageView
+                    android:id="@+id/imageView44"
+                    android:layout_width="220dp"
+                    android:layout_height="157dp"
+                    app:srcCompat="@drawable/icindividual"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/text_style_bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/create_your_user_account"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:id="@+id/CardForEditTextTextPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardBackgroundColor="#66D5D5D8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" >
+
+                    <EditText
+                        android:id="@+id/editTextTextPersonName"
+                        style="@style/text_style_bold_small_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:ems="10"
+                        android:focusable="true"
+                        android:text="@={signupViewModel.name}"
+                        android:hint="@string/name"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/white"
+                        />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textViewUserName"
+                    style="@style/text_style_bold_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Username *"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextTextPersonName" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:id="@+id/CardForEditTextTextPersonUserName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardBackgroundColor="#66D5D5D8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewUserName" >
+
+                    <EditText
+                        android:id="@+id/editTextTextPersonUserName"
+                        style="@style/text_style_bold_small_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:ems="10"
+                        android:focusable="true"
+                        android:hint="Enter Username"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:text="@={signupViewModel.username}"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/white" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    app:cardElevation="0dp"
+                    android:id="@+id/CardForEditTextTextPersonName2"
+                    app:layout_constraintEnd_toEndOf="@+id/CardForEditTextTextPersonName"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="#66D5D5D8"
+                    app:cardCornerRadius="10dp"
+                    >
+
+                    <EditText
+                        android:id="@+id/editTextTextPersonName2"
+                        style="@style/text_style_bold_small_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="Enter Email"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/white"
+                        android:text="@={signupViewModel.useremail}"
+                        />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    android:id="@+id/CardForEditTextTextPersonName5"
+                    app:cardBackgroundColor="#66D5D5D8"
+                    app:layout_constraintEnd_toEndOf="@+id/CardForEditTextTextPersonName2"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" >
+                    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
+                        android:id="@+id/editTextTextPersonName5"
+                        style="@style/text_style_bold_small_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="@string/enter_password"
+                        android:inputType="textPassword"
+                        android:maxLength="10"
+                        android:fontFamily="@font/gilroylight"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/white"
+                        android:text="@={signupViewModel.password}"
+                        />
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_marginTop="16dp"
+                    app:cardElevation="0dp"
+                    android:visibility="gone"
+                    android:id="@+id/CardForEditTextTextPersonName6"
+                    app:layout_constraintEnd_toEndOf="@+id/CardForEditTextTextPersonName5"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView22"
+                    android:background="@drawable/bg_login_back"
+                    >
+                    <EditText
+                        android:id="@+id/editTextTextPersonName6"
+                        style="@style/text_style_bold_small_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_login_back"
+                        android:drawableLeft="@drawable/ic_calendar"
+                        android:drawablePadding="8dp"
+                        android:ems="10"
+
+                        android:fontFamily="@font/robotobold"
+                        android:onClick="@{()->signupViewModel.dobclick()}"
+                        android:focusable="false"
+                        android:hint="@string/dd_mm_yy"
+                        android:padding="20dp"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/dark_grey"
+                        android:text="@={signupViewModel.dod}"
+                        />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CardForEditTextTextPersonName7"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="#66D5D5D8"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@+id/CardForEditTextTextPersonName2"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                            android:id="@+id/ccp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:padding="6dp"
+                            app:ccp_defaultCode="91"
+                            app:ccp_defaultNameCode="IN"
+                            app:ccp_hideNameCode="true"
+                            app:ccp_textColor="@color/white"/>
+
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="#9C9B9B" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName7"
+                            style="@style/text_style_bold_small_title"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="7"
+                            android:ems="10"
+                            android:hint="@string/type_mobile_number"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:padding="10dp"
+                            android:text="@={signupViewModel.mobilenumber}"
+                            android:textColor="@android:color/white"
+                            android:textColorHint="@color/white" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <RadioGroup
+                    android:id="@+id/rdo_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="24dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/GenderSelection">
+
+                    <CheckBox
+                        android:id="@+id/rdo_male"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_selector"
+                        android:button="@null"
+                        android:drawableTop="@drawable/ic_male"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/bg_gender_selction"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="20dp"
+                        android:text="@string/male"
+                        android:textColor="@color/bg_gender_selction" />
+
+                    <CheckBox
+                        android:id="@+id/rdo_female"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_selector"
+                        android:button="@null"
+                        android:drawableTop="@drawable/ic_female"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/bg_gender_selction"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="20dp"
+                        android:text="@string/female"
+                        android:textColor="@color/bg_gender_selction"
+                        android:textSize="14sp" />
+
+
+                    <CheckBox
+                        android:id="@+id/rdo_Trans"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_selector"
+                        android:button="@null"
+                        android:drawableTop="@drawable/ic_transgender_svgrepo_com"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/bg_gender_selction"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="25dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="20dp"
+                        android:text="Trans"
+                        android:textColor="@color/bg_gender_selction" />
+
+                </RadioGroup>
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="150dp"
+                    android:background="@drawable/bg_logins"
+                    android:gravity="center"
+                    android:onClick="@{()->signupViewModel.signUpClick()}"
+                    android:padding="18dp"
+                    android:text="@string/sign_ups"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/gilroyextrabold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/CardForEditTextTextPersonName7"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName6"
+                    android:text="Select Gender*"
+                    android:visibility="gone"
+                    style="@style/text_style_bold_title"
+                    android:layout_marginLeft="24dp"
+                    android:id="@+id/GenderSelection"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextTextPersonName7"/>
+
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="end"
+                    android:text="@string/all_ready_have_an_account"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/gilroy_regular"
+                    app:layout_constraintBottom_toTopOf="@+id/textView2"
+                    app:layout_constraintEnd_toStartOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/rdo_gender" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginRight="50dp"
+                    android:onClick="@{()->signupViewModel.loginClick()}"
+                    android:padding="10dp"
+                    android:text="@string/log_ins"
+                    android:fontFamily="@font/gilroyextrabold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                    app:layout_constraintEnd_toEndOf="@+id/textView2"
+                    app:layout_constraintStart_toEndOf="@+id/textView8"
+                    app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+
+                <TextView
+                    android:id="@+id/textView19"
+                    style="@style/text_style_bold_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Name *"
+                    android:layout_marginLeft="24dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    style="@style/text_style_bold_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Email *"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextTextPersonUserName" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    style="@style/text_style_bold_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/password"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName2"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextTextPersonName2" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    style="@style/text_style_bold_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    android:text="@string/date_of_birth"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName5"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextTextPersonName5" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    style="@style/text_style_bold_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:text="@string/mobile_numbers"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName5"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextTextPersonName6" />
+
+                <ImageView
+                    android:id="@+id/imageView21"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="6dp"
+                    android:visibility="gone"
+                    android:scaleType="fitXY"
+                    android:onClick="@{()->signupViewModel.profileClick()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_placeholderimage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
