@@ -16,11 +16,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.util.Util
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.ktx.messaging
@@ -41,7 +39,6 @@ import com.mdq.social.app.helper.appsignature.AppSignatureHelper.Companion.TAG
 import com.mdq.social.base.BaseFragment
 import com.mdq.social.databinding.FragmentHomeBinding
 import com.mdq.social.ui.Firebase.Constants
-import com.mdq.social.ui.login.LoginActivity
 import com.mdq.social.ui.models.User
 import com.mdq.social.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -92,8 +89,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (it.isComplete) {
+
                 var firebaseToken = it.result.toString()
                 Log.i("sanjai1243421321", firebaseToken)
+
             }
         }
 
@@ -439,6 +438,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
                 }
                 Log.d(TAG, msg)
             }
+
     }
 
     private fun sendFcmNotification(notificationJo: JSONObject) {

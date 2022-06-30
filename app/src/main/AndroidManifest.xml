@@ -186,6 +186,7 @@
             </intent-filter>
         </service>
 
+
         <provider
             android:name=".app.helper.upload.EasyImageFileProvider"
             android:authorities="com.zoodly.social.provider"
