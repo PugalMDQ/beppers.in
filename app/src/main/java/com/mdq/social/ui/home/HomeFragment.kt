@@ -89,10 +89,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (it.isComplete) {
-
                 var firebaseToken = it.result.toString()
                 Log.i("sanjai1243421321", firebaseToken)
-
             }
         }
 
@@ -226,7 +224,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
         no_of_like: String
     ) {
         positions = position
-        if (active.equals("0")) {
+        if (imageView32.getTag().equals("Unliked")) {
             homeViewModel!!.getAddLikeComments(
                 recentItem.id.toString(),
                 recentItem.user_id.toString(),
@@ -237,8 +235,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
                         val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
                         if (addLikeCommentsResponse != null) {
                             if (addLikeCommentsResponse.message.equals("Like added successfully!")) {
+
                                 imageView32.setImageResource(R.drawable.ic_heart_1fill)
-                                getRecent(appPreference.USERID)
+//                                getRecent(appPreference.USERID)
+                                imageView32.setTag("Liked")
+
                                 updtedLikeUnLike(tvLikeCount, recentItem.id.toString())
                                 prepareNotificationMessage(
                                     recentItem.user_id.toString(),
@@ -253,8 +254,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
                         }
                     }
                 })
-        } else if (active.equals("1")) {
-            if (no_of_like != "0") {
+        } else if (imageView32.getTag().equals("Liked")) {
                 homeViewModel!!.getAddUnLikeComments(
                     recentItem.id.toString(),
                     recentItem.user_id.toString(),
@@ -266,13 +266,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
                             if (addLikeCommentsResponse != null) {
                                 if (addLikeCommentsResponse.message.equals("Like removed successfully!")) {
                                     imageView32.setImageResource(R.drawable.ic_heart_1__1_)
-                                    getRecent(appPreference.USERID)
+//                                    getRecent(appPreference.USERID)
                                     updtedLikeUnLike(tvLikeCount, recentItem.id.toString())
+                                    imageView32.setTag("Unliked")
                                 }
                             }
                         }
                     })
-            }
         }
     }
 

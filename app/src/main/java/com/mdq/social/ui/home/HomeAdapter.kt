@@ -188,11 +188,14 @@ class HomeAdapter(val context: Context, var clickManager: ClickManager,var homeV
 
         if(!item.active.isNullOrEmpty()) {
             if (item.active!!.equals("1")) {
+                holder.getBinding().imageView32.setTag("Liked")
                 binding.getBinding().imageView32.setImageResource(R.drawable.ic_heart_1fill)
             } else {
+                holder.getBinding().imageView32.setTag("Unliked")
                 binding.getBinding().imageView32.setImageResource(R.drawable.ic_heart_1__1_)
             }
         }else{
+            holder.getBinding().imageView32.setTag("Unliked")
             binding.getBinding().imageView32.setImageResource(R.drawable.ic_heart_1__1_)
         }
 

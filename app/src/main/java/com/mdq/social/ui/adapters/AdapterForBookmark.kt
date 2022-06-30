@@ -40,7 +40,8 @@ class AdapterForBookmark(
             image: ImageView,
             no_of_like: String,
             position: Int,
-            active: String
+            active: String,
+            textView:TextView?
         )
 
         fun hide(postid: String, who: String)
@@ -151,11 +152,14 @@ class AdapterForBookmark(
             }
             if (!trendingItem!!.get(position).active.isNullOrEmpty()) {
                 if (trendingItem!!.get(position).active!!.equals("1")) {
+                    holder.like?.setTag("Liked")
                     holder.like?.setImageResource(R.drawable.ic_heart_1fill)
                 } else {
+                    holder.like?.setTag("Unliked")
                     holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
                 }
             } else {
+                holder.like?.setTag("Unliked")
                 holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
             }
 
@@ -205,6 +209,7 @@ class AdapterForBookmark(
                         )
                     )
                 }
+
                 if (uri!!.size > 1) {
                     holder.SingleImage?.visibility = View.GONE
                     holder.slider!!.visibility = View.VISIBLE
@@ -233,7 +238,7 @@ class AdapterForBookmark(
                     trendingItem!!.get(position).active!!
                 } else {
                     "0"
-                }
+                },holder.Likecount
             )
         }
         holder.imageView59?.setOnClickListener {

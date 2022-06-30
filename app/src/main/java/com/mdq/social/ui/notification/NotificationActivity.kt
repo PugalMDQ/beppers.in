@@ -6,8 +6,9 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,42 +18,36 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mdq.social.BR
 import com.mdq.social.PreferenceManager
 import com.mdq.social.R
-import com.mdq.social.app.data.response.getshopAlbumDetails.NewPostsearchDeailResponse
-import com.mdq.social.app.data.response.recent.DataItem
-import com.mdq.social.app.data.response.recent.RecentResponse
-import com.mdq.social.app.data.response.user_profile.UserProfileResponse
-import com.mdq.social.app.data.viewmodels.base.BaseViewModel
-import com.mdq.social.app.data.viewmodels.notification.NotificationViewModel
-import com.mdq.social.base.BaseActivity
-import com.mdq.social.databinding.FragmentNotificationBinding
-import com.mdq.social.ui.adapters.AdapterForTrendingPost
-import com.mdq.social.ui.listOfPost.AdapterForList
-import com.mdq.social.ui.search.TrendingAdapter
-import com.mdq.social.ui.searchdetails.VideoAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_notification.*
-import kotlinx.android.synthetic.main.fragment_notification.img_back
-import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_search_details.*
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.mdq.social.app.data.response.Rating.Ratings
 import com.mdq.social.app.data.response.addlikecomments.AddLikeCommentsResponse
 import com.mdq.social.app.data.response.bookmarklist.BookMarkListResponse
 import com.mdq.social.app.data.response.getshopAlbumDetails.DataItemes
+import com.mdq.social.app.data.response.getshopAlbumDetails.NewPostsearchDeailResponse
 import com.mdq.social.app.data.response.notification.NotificationListResponse
+import com.mdq.social.app.data.response.recent.DataItem
+import com.mdq.social.app.data.response.recent.RecentResponse
 import com.mdq.social.app.data.response.signup.SignupResponse
+import com.mdq.social.app.data.response.user_profile.UserProfileResponse
+import com.mdq.social.app.data.viewmodels.base.BaseViewModel
+import com.mdq.social.app.data.viewmodels.notification.NotificationViewModel
 import com.mdq.social.app.helper.appsignature.AppSignatureHelper
+import com.mdq.social.base.BaseActivity
+import com.mdq.social.databinding.FragmentNotificationBinding
 import com.mdq.social.ui.Firebase.Constants
 import com.mdq.social.ui.adapters.AdapterForBookmark
 import com.mdq.social.ui.adapters.AdapterForSearchPost
-import com.mdq.social.ui.bookmark.BookMarkAdapter
+import com.mdq.social.ui.adapters.AdapterForTrendingPost
+import com.mdq.social.ui.listOfPost.AdapterForList
+import com.mdq.social.ui.search.TrendingAdapter
+import com.mdq.social.ui.searchdetails.VideoAdapter
+import kotlinx.android.synthetic.main.fragment_notification.*
 import org.json.JSONObject
 import java.lang.reflect.Type
-import java.util.HashMap
 
 class NotificationActivity : BaseActivity<FragmentNotificationBinding, NotificationNavigator>(),
     NotificationNavigator,TrendingAdapter.postClick,AdapterForList.like,AdapterForTrendingPost.ClickManager,AdapterForSearchPost.like,VideoAdapter.postClick,AdapterForList.clickManager,NotificationAdapter.readcall,AdapterForBookmark.like{
@@ -338,7 +333,7 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
 
     }
 
-    override fun like(id: String,user_id: String,image:ImageView,no_of_like:String,positions: Int,active:String) {
+    override fun like(id: String,user_id: String,image:ImageView,no_of_like:String,positions: Int,active:String,textViews: TextView?) {
 
         position=positions
         if(active.equals("0")) {
@@ -352,7 +347,11 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                         if (addLikeCommentsResponse != null) {
                             if (addLikeCommentsResponse.message.equals("Like added successfully!")) {
                                 image.setImageResource(R.drawable.ic_heart_1fill)
-                                getProfileDetail(user_id)
+
+                                var i = textViews?.text.toString().toInt()
+                                i=i+1
+                                textViews?.setText(i.toString())
+
                                 prepareNotificationMessage( user_id.toString(),appPreference.USERID,appPreference.NAME)
 
                                 insertNotification( id.toString(),user_id,appPreference.NAME)
@@ -364,7 +363,6 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                 })
         }
         else if(active.equals("1")) {
-            if (no_of_like!="0") {
                 notificationViewModel!!.UnLike(
                     id.toString(),
                     user_id.toString(),
@@ -375,12 +373,15 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                             if (addLikeCommentsResponse != null) {
                                 if (addLikeCommentsResponse.message.equals("Like removed successfully!")) {
                                     image.setImageResource(R.drawable.ic_heart_1__1_)
-                                    getProfileDetail(user_id)
+
+                                    var i = textViews?.text.toString().toInt()
+                                    i=i-1
+                                    textViews?.setText(i.toString())
+
                                 }
                             }
                         }
                     })
-            }
         }
     }
 
@@ -390,11 +391,12 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
         tvLikeCount: TextView,
         recentItem: DataItem,
         active: String,
-        no_of_like: String
+        no_of_like: String,
+        textViews:TextView?
     ) {
 
         position=positions
-        if(active.equals("0")) {
+        if(imageView32.getTag().equals("Unliked")) {
             notificationViewModel!!.AddLike(
                 recentItem.id.toString(),
                 recentItem.user_id.toString(),
@@ -404,17 +406,25 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                         val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
                         if (addLikeCommentsResponse != null) {
                             if (addLikeCommentsResponse.message.equals("Like added successfully!")) {
+
+
+                                var i = textViews?.text.toString().toInt()
+                                i=i+1
+                                textViews?.setText(i.toString())
+
                                 imageView32.setImageResource(R.drawable.ic_heart_1fill)
+                                imageView32.setTag("Liked")
+
                                 prepareNotificationMessage( recentItem.user_id.toString(),appPreference.USERID,appPreference.USERNAME)
                                 insertNotification(recentItem. id.toString(),recentItem.user_id!!,appPreference.USERNAME)
-                                getRecent(appPreference.USERID)
+//                                getRecent(appPreference.USERID)
                             }
                         }
                     }
                 })
         }
-        else if(active.equals("1")) {
-            if (no_of_like!="0") {
+        else if(imageView32.getTag().equals("Liked")) {
+
                 notificationViewModel!!.UnLike(
                     recentItem.id.toString(),
                     recentItem.user_id.toString(),
@@ -424,13 +434,16 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                             val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
                             if (addLikeCommentsResponse != null) {
                                 if (addLikeCommentsResponse.message.equals("Like removed successfully!")) {
+                                    imageView32.setTag("Unliked")
+                                    var i = textViews?.text.toString().toInt()
+                                    i=i-1
+                                    textViews?.setText(i.toString())
                                     imageView32.setImageResource(R.drawable.ic_heart_1__1_)
-                                    getRecent(appPreference.USERID)
+//                                    getRecent(appPreference.USERID)
                                 }
                             }
                         }
                     })
-            }
         }
     }
 
@@ -480,10 +493,11 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
         image: ImageView,
         no_of_like: String,
         positions: Int,
-        active: String
+        active: String,
+        textViews :TextView?
     ) {
         position=positions
-        if(active.equals("0")) {
+        if(image.getTag().equals("Unliked")) {
             notificationViewModel!!.AddLike(
                 id.toString(),
                 user_id
@@ -493,21 +507,29 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                         val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
                         if (addLikeCommentsResponse != null) {
                             if (addLikeCommentsResponse.message.equals("Like added successfully!")) {
+
+                                var i = textViews?.text.toString().toInt()
+                                i=i+1
+                                textViews?.setText(i.toString())
+
                                 image.setImageResource(R.drawable.ic_heart_1fill)
                                 prepareNotificationMessage(user_id.toString(),appPreference.USERID,appPreference.USERNAME)
                                 insertNotification(id.toString(),user_id,appPreference.USERNAME)
-                                if(search!=null){
-                                    serach()
-                                }else if(category!=null ||city!=null ||area!=null){
-                                    filterPost()
-                                }
+
+//                                if(search!=null){
+//                                    serach()
+//                                }else if(category!=null ||city!=null ||area!=null){
+//                                    filterPost()
+//                                }
+                                image.setTag("Liked")
+
                             }
                         }
                     }
                 })
         }
-        else if(active.equals("1")) {
-            if (no_of_like!="0") {
+        else if(image.getTag().equals("Liked")) {
+
                 notificationViewModel!!.UnLike(
                     id.toString(),
                     user_id
@@ -517,17 +539,23 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                             val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
                             if (addLikeCommentsResponse != null) {
                                 if (addLikeCommentsResponse.message.equals("Like removed successfully!")) {
+
+                                    var i = textViews?.text.toString().toInt()
+                                    i=i-1
+                                    textViews?.setText(i.toString())
+
                                     image.setImageResource(R.drawable.ic_heart_1__1_)
-                                    if(search!=null){
-                                        serach()
-                                    }else if(category!=null ||city!=null ||area!=null){
-                                        filterPost()
-                                    }
+//                                    if(search!=null){
+//                                        serach()
+//                                    }else if(category!=null ||city!=null ||area!=null){
+//                                        filterPost()
+//                                    }
+                                    image.setTag("Unliked")
+
                                 }
                             }
                         }
                     })
-            }
         }
     }
 

@@ -49,7 +49,7 @@ class AdapterForList(
     }
 
     interface like{
-        fun like(id:String,user_id:String,image:ImageView,no_of_like:String,position: Int,active:String)
+        fun like(id:String,user_id:String,image:ImageView,no_of_like:String,position: Int,active:String,textView:TextView?)
     }
 
     override fun onBindViewHolder(holder: mine, position: Int) {
@@ -212,7 +212,7 @@ class AdapterForList(
                 }
                 else{
                     "0"
-                }
+                },holder.Likecount
             )
         }
     }

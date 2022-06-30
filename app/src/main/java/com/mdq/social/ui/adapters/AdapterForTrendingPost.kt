@@ -32,7 +32,8 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
             tvLikeCount: TextView,
             get: DataItem,
             active: String,
-            no_of_like: String
+            no_of_like: String,
+            textView:TextView?
         )
         fun saveBookmark(postid: String, position: Int, userId: String?,who:String)
 
@@ -107,11 +108,14 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
 
                     if(!trendingItem.get(position).active.isNullOrEmpty()) {
                         if (trendingItem.get(position).active!!.equals("1")) {
+                            holder.like?.setTag("Liked")
                             holder.like?.setImageResource(R.drawable.ic_heart_1fill)
                         } else {
+                            holder.like?.setTag("Unliked")
                             holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
                         }
                     }else{
+                        holder.like?.setTag("Unliked")
                         holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
                     }
 
@@ -146,7 +150,8 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
                                 else{
                                     "0"
                                 },
-                                trendingItem!!.get(position).no_of_likes!!
+                                trendingItem!!.get(position).no_of_likes!!,
+                                holder.Likecount
                             )
                             var vibration = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                             if (Build.VERSION.SDK_INT >= 26) {

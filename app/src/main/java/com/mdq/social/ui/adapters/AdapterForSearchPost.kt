@@ -18,7 +18,6 @@ import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import com.mdq.social.R
 import com.mdq.social.app.data.response.getshopAlbumDetails.DataItemes
-import com.mdq.social.app.data.response.recent.DataItem
 import com.mdq.social.ui.home.SliderAdapter2
 import com.mdq.social.ui.post.PostActivity
 import com.mdq.social.ui.profile.ProfileActivity
@@ -26,7 +25,14 @@ import com.mdq.social.ui.profile.ProfileActivity
 class AdapterForSearchPost(var context: Context, var trendingItem:List<DataItemes>?, var position:Int?,var likes:like,var user_id: String,var who: String): RecyclerView.Adapter<AdapterForSearchPost.mine>() {
 
      interface like{
-         fun likeFromSearchPost(id:String,user_id:String,image:ImageView,no_of_like:String,position: Int,active:String)
+         fun likeFromSearchPost(
+             id:String,
+             user_id:String,
+             image:ImageView,
+             no_of_like:String,
+             position: Int,
+             active:String, textView: TextView?
+         )
 
          fun hide(postid:String,who:String)
 
@@ -125,11 +131,14 @@ class AdapterForSearchPost(var context: Context, var trendingItem:List<DataIteme
             }
             if(!trendingItem!!.get(position).active.isNullOrEmpty()) {
                 if (trendingItem!!.get(position).active!!.equals("1")) {
+                    holder.like?.setTag("Liked")
                     holder.like?.setImageResource(R.drawable.ic_heart_1fill)
                 } else {
+                    holder.like?.setTag("Unliked")
                     holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
                 }
             }else{
+                holder.like?.setTag("Unliked")
                 holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
             }
 
@@ -225,7 +234,7 @@ class AdapterForSearchPost(var context: Context, var trendingItem:List<DataIteme
                 }
                 else{
                     "0"
-                }
+                },holder.Likecount
                 )
         }
         holder.imageView59?.setOnClickListener {

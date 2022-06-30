@@ -537,7 +537,6 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
                             unf = 0
                             businessBinding?.follow?.setText("Followback")
                             privacydetails = 0
-
                         }
                     }
                 } else {
@@ -715,15 +714,11 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
                             .apply(optionsf)
                             .into(fimageView19)
                     } else {
-
                         businessBinding?.NOLAYOUT?.visibility = View.VISIBLE
                         businessBinding?.NOLAYOUT?.visibility = View.VISIBLE
                         businessBinding?.NOLAYOUT?.visibility = View.VISIBLE
-
                     }
                 } else {
-
-
                     showToast(response.throwable?.message!!)
                 }
             })
