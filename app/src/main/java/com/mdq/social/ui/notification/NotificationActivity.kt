@@ -336,7 +336,7 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
     override fun like(id: String,user_id: String,image:ImageView,no_of_like:String,positions: Int,active:String,textViews: TextView?) {
 
         position=positions
-        if(active.equals("0")) {
+        if(image.getTag().equals("Unliked")) {
             notificationViewModel!!.AddLike(
                 id.toString(),
                 user_id.toString()
@@ -351,6 +351,7 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                                 var i = textViews?.text.toString().toInt()
                                 i=i+1
                                 textViews?.setText(i.toString())
+                                image.setTag("Liked")
 
                                 prepareNotificationMessage( user_id.toString(),appPreference.USERID,appPreference.NAME)
 
@@ -362,7 +363,7 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                     }
                 })
         }
-        else if(active.equals("1")) {
+        else if(image.getTag().equals("Liked")) {
                 notificationViewModel!!.UnLike(
                     id.toString(),
                     user_id.toString(),
@@ -373,10 +374,13 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                             if (addLikeCommentsResponse != null) {
                                 if (addLikeCommentsResponse.message.equals("Like removed successfully!")) {
                                     image.setImageResource(R.drawable.ic_heart_1__1_)
+                                    image.setTag("Unliked")
 
                                     var i = textViews?.text.toString().toInt()
                                     i=i-1
-                                    textViews?.setText(i.toString())
+                                    if(!i.toString().contains("-")) {
+                                        textViews?.setText(i.toString())
+                                    }
 
                                 }
                             }
@@ -437,7 +441,9 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                                     imageView32.setTag("Unliked")
                                     var i = textViews?.text.toString().toInt()
                                     i=i-1
-                                    textViews?.setText(i.toString())
+                                    if(!i.toString().contains("-")) {
+                                        textViews?.setText(i.toString())
+                                    }
                                     imageView32.setImageResource(R.drawable.ic_heart_1__1_)
 //                                    getRecent(appPreference.USERID)
                                 }
@@ -542,8 +548,9 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
 
                                     var i = textViews?.text.toString().toInt()
                                     i=i-1
-                                    textViews?.setText(i.toString())
-
+                                    if(!i.toString().contains("-")) {
+                                        textViews?.setText(i.toString())
+                                    }
                                     image.setImageResource(R.drawable.ic_heart_1__1_)
 //                                    if(search!=null){
 //                                        serach()

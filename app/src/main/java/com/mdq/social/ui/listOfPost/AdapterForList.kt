@@ -129,11 +129,14 @@ class AdapterForList(
 
         if(!recentItem.data?.get(position)?.active.isNullOrEmpty()) {
             if (recentItem.data?.get(position)?.active!!.equals("1")) {
+                holder.like?.setTag("Liked")
                 holder.like?.setImageResource(R.drawable.ic_heart_1fill)
             } else {
+                holder.like?.setTag("Unliked")
                 holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
             }
         }else{
+            holder.like?.setTag("Unliked")
             holder.like?.setImageResource(R.drawable.ic_heart_1__1_)
         }
 
