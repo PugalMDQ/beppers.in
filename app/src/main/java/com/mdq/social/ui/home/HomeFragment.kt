@@ -199,9 +199,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
     private fun recentlistRecyclerViews(dataItem: List<DataItem>) {
 
         if (dataItem != null && dataItem.size > 0) {
+
             homeBinding!!.executePendingBindings()
             homeAdapter!!.setHomeAdapter(dataItem)
-
             val urls: MutableList<String> = ArrayList()
 
             for (`object` in dataItem) {
@@ -212,6 +212,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
 
             rv_home.smoothScrollBy(0, 1)
             rv_home.smoothScrollBy(0, -1)
+
         }
     }
 

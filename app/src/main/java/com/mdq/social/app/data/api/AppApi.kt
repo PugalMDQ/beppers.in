@@ -82,8 +82,6 @@ interface AppApi {
     @GET(ApiConstants.API_CATEGORY)
     fun getCategory(): Observable<CategoryResponse>
 
-    @GET(ApiConstants.API_GETTIMES)
-    fun getTimes(): Observable<TimesResponse>
 
     /*Get All Post*/
     @GET(ApiConstants.API_GETUSERALBUMDETAILS)
