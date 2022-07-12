@@ -110,10 +110,6 @@ abstract class BaseActivity<VB : ViewDataBinding, V : Any>: DaggerAppCompatActiv
             finish()
             return true
         }
-
         return super.onOptionsItemSelected(item)
-
     }
-
-
 }

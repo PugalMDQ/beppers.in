@@ -156,12 +156,10 @@ class   AddpostActivity : BaseActivity<ActivityAddPostBinding, AddPostNavigator>
                     activityAddPostBinding?.videoView?.start()
                     filesr=File(videoPath)
                     addPostViewModel?.path?.add(filesr!!)
-
                     val filePath: String =
                         FileUtils.getPath(this, Uri.parse(uuri))
                     filer = File(filePath)
                     addPostViewModel?.thumb?.set(filer)
-
             }
             else if(mArrayUri!=null){
                 updates()
@@ -270,7 +268,6 @@ class   AddpostActivity : BaseActivity<ActivityAddPostBinding, AddPostNavigator>
                 showToast(response.throwable?.message!!)
             }
         })
-
     }
 
     private fun search() {

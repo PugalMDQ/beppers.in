@@ -32,9 +32,9 @@ class ApiServiceGenerator {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient)
                 .build()
+
             return retrofit.create(serviceClass)
 
         }
     }
-
 }
