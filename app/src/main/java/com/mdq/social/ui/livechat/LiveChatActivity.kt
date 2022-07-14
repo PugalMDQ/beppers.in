@@ -578,7 +578,6 @@ class LiveChatActivity : BaseActivity<ActivityLiveChatBinding, LiveChatNavigator
                     dialoglogout.dismiss()
                 }
 
-                Toast.makeText(context, "" + position, Toast.LENGTH_LONG).show()
                 textView24.setOnClickListener {
                     deleteChats(chatMessage!!.get(position), position)
                     dialoglogout.dismiss()

@@ -37,6 +37,7 @@ import com.mdq.social.databinding.FragmentSearchDetailsBinding
 import com.mdq.social.ui.notification.NotificationActivity
 import com.mdq.social.ui.signupfreelancer.CategoryAdapter
 import kotlinx.android.synthetic.main.fragment_search_details.*
+import kotlinx.android.synthetic.main.nav_home_fragment.*
 
 class SearchDetailsFragment : BaseFragment<FragmentSearchDetailsBinding, SearchDetailsNavigator>(),
     CategoryAdapter.ClickManager, TextWatcher, View.OnClickListener, VideoAdapter.postClick {
@@ -156,11 +157,36 @@ class SearchDetailsFragment : BaseFragment<FragmentSearchDetailsBinding, SearchD
 
         getSearchDetails()
 
+        fragmentSearchDetailsBinding?.rvGallery?.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    fragmentSearchDetailsBinding?.constraintLayout7?.visibility=View.GONE
+                    fragmentSearchDetailsBinding?.imgBack?.visibility=View.INVISIBLE
+                    fragmentSearchDetailsBinding?.editTextTextPersonName15?.visibility=View.GONE
+                    fragmentSearchDetailsBinding?.textView102?.visibility=View.GONE
+                    fragmentSearchDetailsBinding?.tbSearch?.visibility=View.GONE
+                    imgNotifiction.visibility=View.GONE
+                } else if (dy < 0) {
+                    println("Scrolled Upwards")
+                    fragmentSearchDetailsBinding?.constraintLayout7?.visibility=View.VISIBLE
+                    fragmentSearchDetailsBinding?.imgBack?.visibility=View.VISIBLE
+                    fragmentSearchDetailsBinding?.editTextTextPersonName15?.visibility=View.VISIBLE
+                    fragmentSearchDetailsBinding?.textView102?.visibility=View.VISIBLE
+                    fragmentSearchDetailsBinding?.tbSearch?.visibility=View.VISIBLE
+                    imgNotifiction.visibility=View.VISIBLE
+
+                } else {
+                    println("No Vertical Scrolled")
+                }
+            }
+        })
+
     }
 
     private fun filter() {
         try {
-
             var dialog = Dialog(requireActivity(), R.style.dialog_center)
             dialog.setContentView(R.layout.dialog_filter)
             tvCategory = dialog.findViewById<EditText>(R.id.edt_category)

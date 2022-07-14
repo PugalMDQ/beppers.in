@@ -109,7 +109,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeNavigator>(), HomeNav
     var mArrayUri: ArrayList<String>? = null
     var position = 0
     private val nevigationMenuItemList: ArrayList<NevigationMenuItem> = ArrayList()
-    private val menuName = arrayOf("Settings", "Bookmark", "Privacy Policy", "Terms & Conditions")
+    private val menuName = arrayOf("Settings", "Bookmark", "Privacy", "Terms & Conditions")
     private var preferenceManager: PreferenceManager? = null
     private var fragmentManager: FragmentManager? = null
 

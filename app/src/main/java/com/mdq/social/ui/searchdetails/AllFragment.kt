@@ -26,7 +26,6 @@ class AllFragment : BaseFragment<FragmentAllBinding, SearchDetailsNavigator>(),
             }
         }
     }
-
     private var fragmentAllBinding: FragmentAllBinding? = null
     private var searchDetailsViewModel: SearchDetailsViewModel? = null
     private var profileSearchAdapter: ProfileSearchAdapter? = null

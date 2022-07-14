@@ -55,7 +55,6 @@
         android:id="@+id/editTextTextPersonName15"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:ems="10"
@@ -74,7 +73,7 @@
         android:fontFamily="@font/gilroylight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView102"
-        app:layout_constraintTop_toBottomOf="@+id/textView102" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tb_search"

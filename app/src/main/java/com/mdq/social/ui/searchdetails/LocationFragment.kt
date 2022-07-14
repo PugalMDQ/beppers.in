@@ -21,13 +21,10 @@ class LocationFragment: BaseFragment<FragmentLocationBinding, SearchDetailsNavig
         }
     }
 
-
     private var fragmentLocationBinding: FragmentLocationBinding? = null
     private var searchDetailsViewModel: SearchDetailsViewModel? = null
     private var locationAdapter: LocationAdapter? = null
-
     private var getShopAlbumDetailsResponse :GetShopAlbumDetailsResponse?=null
-
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_location

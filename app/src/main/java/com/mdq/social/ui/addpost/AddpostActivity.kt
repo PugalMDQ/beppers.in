@@ -37,6 +37,7 @@ import com.mdq.social.app.data.response.addalbumresponse.AddAlbumResponse
 import com.mdq.social.app.data.response.category.CategoryResponse
 import com.mdq.social.app.data.response.category.DataItem
 import com.mdq.social.app.data.response.followresponse.FollowResponse
+import com.mdq.social.app.data.response.getshopAlbumDetails.DataItems
 import com.mdq.social.app.data.response.getshopAlbumDetails.UserSearchDetailResponse
 import com.mdq.social.app.data.viewmodels.addpost.AddPostViewModel
 import com.mdq.social.app.data.viewmodels.base.BaseViewModel
@@ -76,6 +77,7 @@ class   AddpostActivity : BaseActivity<ActivityAddPostBinding, AddPostNavigator>
     private var filess:ArrayList<File>?=null
     private var bitmap:String?=null
     private var ii:String?=null
+    var getShopAlbumDetailsResponse:ArrayList<DataItems>?=null
     private var filesr:File?=null
     val userIDs = ArrayList<String>()
     var chipSearch1:Chip ?= null
@@ -280,14 +282,25 @@ class   AddpostActivity : BaseActivity<ActivityAddPostBinding, AddPostNavigator>
                         response.data as UserSearchDetailResponse
                     if (getShopAlbumDetailsResponse != null && getShopAlbumDetailsResponse?.data != null) {
 
+                        this.getShopAlbumDetailsResponse= ArrayList<DataItems>()
+
+                        for(i in getShopAlbumDetailsResponse?.data.indices){
+                            if ( getShopAlbumDetailsResponse?.data?.get(i)?.type.equals("freelancer") ||  getShopAlbumDetailsResponse?.data?.get(i)?.type.equals(
+                                    "business"
+                                )
+                            ) {
+                                this.getShopAlbumDetailsResponse!!.add(getShopAlbumDetailsResponse.data?.get(i))
+                            }
+                            }
+
                         profileSearchAdapter = profileSearchAdapterForAddpost(
-                            getShopAlbumDetailsResponse?.data,
+                            this.getShopAlbumDetailsResponse,
                             this,this
                         )
                         activityAddPostBinding?.rvSearch?.visibility=View.VISIBLE
                         activityAddPostBinding?.rvSearch?.adapter=profileSearchAdapter
                     } else {
-                        Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show()
+
                     }
                 } else {
                     showToast(response.throwable?.message!!)

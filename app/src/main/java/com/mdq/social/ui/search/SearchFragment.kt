@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.RecyclerView
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import com.mdq.social.BR
@@ -28,6 +29,7 @@ import com.mdq.social.databinding.FragmentSearchBinding
 import com.mdq.social.ui.notification.NotificationActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.nav_home_fragment.*
 
 class SearchFragment: BaseFragment<FragmentSearchBinding, SearchNavigator>(),
     SearchNavigator,RecommendedAdapter.RecommendClickManager,TrendingAdapter.postClick {
@@ -60,6 +62,8 @@ class SearchFragment: BaseFragment<FragmentSearchBinding, SearchNavigator>(),
         searchViewModel?.navigator = this
 
         ViewCompat.setNestedScrollingEnabled(rv_trend, false)
+        val image =
+            requireActivity().findViewById<View>(R.id.img_menu)
 
         slidingRootNav = SlidingRootNavBuilder(requireActivity())
             .withMenuOpened(false)
@@ -90,7 +94,25 @@ class SearchFragment: BaseFragment<FragmentSearchBinding, SearchNavigator>(),
             trendinglistRecyclerViews(getPreferenceManager()?.getList()!!)
         }
 
-    }
+        fagmentSearchBinding?.rvTrend?.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    fagmentSearchBinding?.constraintLayout7?.visibility=View.GONE
+                    fagmentSearchBinding?.editTextTextPersonName14?.visibility=View.GONE
+                    image.visibility=View.GONE
+                } else if (dy < 0) {
+                    println("Scrolled Upwards")
+                    fagmentSearchBinding?.constraintLayout7?.visibility=View.VISIBLE
+                    fagmentSearchBinding?.editTextTextPersonName14?.visibility=View.VISIBLE
+                    image.visibility=View.VISIBLE
+                } else {
+                    println("No Vertical Scrolled")
+                }
+            }
+        })
+        }
 
     private fun amIConnected(): Boolean {
         val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -132,7 +154,6 @@ class SearchFragment: BaseFragment<FragmentSearchBinding, SearchNavigator>(),
                         rv_trend.visibility = View.VISIBLE
                         in_tranding.visibility = View.GONE
                         in_recommed.visibility = View.GONE
-
                         trendinglistRecyclerViews(recentResponse.data as List<com.mdq.social.app.data.response.recent.DataItem>)
                         trendingAdapter?.notifyDataSetChanged()
                     }

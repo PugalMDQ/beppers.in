@@ -15,7 +15,6 @@ class TermsFragment : BaseFragment<FragmentTermsBinding, TermsNavigator>(),
     private var termsViewModel: TermsViewModel? = null
     private var fragmentTermsBinding: FragmentTermsBinding? = null
 
-
     override fun getLayoutId(): Int {
         return R.layout.fragment_terms
     }
@@ -35,7 +34,6 @@ class TermsFragment : BaseFragment<FragmentTermsBinding, TermsNavigator>(),
         fragmentTermsBinding = getViewDataBinding()
         fragmentTermsBinding?.termsViewModel = termsViewModel
         termsViewModel?.navigator = this
-
     }
 
 }

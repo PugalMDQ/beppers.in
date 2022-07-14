@@ -101,7 +101,7 @@
     <string name="shop_informatin">Shop Information</string>
     <string name="next">Next</string>
     <string name="version_name">1.0</string>
-    <string name="please_enter_user_name">Please enter user name or email</string>
+    <string name="please_enter_user_name">Please enter user name or mobile no</string>
     <string name="please_enter_user">Please enter your user name</string>
     <string name="please_enter_email">Please enter your user email</string>
     <string name="invalid_email">Invalid Email address</string>

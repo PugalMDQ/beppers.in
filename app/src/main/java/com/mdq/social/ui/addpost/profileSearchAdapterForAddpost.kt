@@ -32,17 +32,26 @@ RecyclerView.Adapter<profileSearchAdapterForAddpost.ProHolder>() {
     }
 
     override fun onBindViewHolder(holder: ProHolder, position: Int) {
-        if(userItem?.get(position)?.profile_photo!=null) {
-            Glide.with(context)
-                .load("https://mdqualityapps.in/profile/" + userItem?.get(position)?.profile_photo)
-                .into(holder.getBinding().imageView41)
-        }else{
-            holder.getBinding().imageView41.setImageDrawable(context.resources.getDrawable(R.drawable.user))
-        }
-        holder.getBinding().textView114.setText(userItem?.get(position)?.name)
-        holder.getBinding().textView115.setText(userItem?.get(position)?.description)
-        holder.itemView.setOnClickListener {
-            clicks.onItemClick(userItem?.get(position)?.id!!,userItem?.get(position)?.user_name!!)
+        if (userItem?.get(position)?.type.equals("freelancer") || userItem?.get(position)?.type.equals(
+                "business"
+            )
+        ) {
+
+            if (!userItem?.get(position)?.profile_photo.isNullOrEmpty()) {
+                Glide.with(context)
+                    .load("https://mdqualityapps.in/profile/" + userItem?.get(position)?.profile_photo)
+                    .into(holder.getBinding().imageView41)
+            } else {
+                holder.getBinding().imageView41.setImageDrawable(context.resources.getDrawable(R.drawable.user))
+            }
+            holder.getBinding().textView114.setText(userItem?.get(position)?.name)
+            holder.getBinding().textView115.setText(userItem?.get(position)?.description)
+            holder.itemView.setOnClickListener {
+                clicks.onItemClick(
+                    userItem?.get(position)?.id!!,
+                    userItem?.get(position)?.user_name!!
+                )
+            }
         }
     }
 

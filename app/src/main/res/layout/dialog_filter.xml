@@ -63,7 +63,6 @@
             android:padding="10dp"
             android:textColor="@android:color/white"
             android:textColorHint="@color/white"
-            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView63"

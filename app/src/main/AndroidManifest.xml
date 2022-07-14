@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-feature android:name="android.hardware.camera"/>
+
 
     <queries>
         <intent>
@@ -186,10 +188,9 @@
             </intent-filter>
         </service>
 
-
         <provider
             android:name=".app.helper.upload.EasyImageFileProvider"
-            android:authorities="com.zoodly.social.provider"
+            android:authorities="com.mdq.social.provider"
             android:exported="false"
             android:grantUriPermissions="true">
 

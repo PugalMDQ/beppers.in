@@ -197,8 +197,10 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
                 getChatBlockStatus()
             }
         }
-
-        if (mParam1.equals(appPreference.USERID)) {
+        if(mParam1.isNullOrEmpty()){
+            businessBinding?.linMess?.visibility = View.INVISIBLE
+        }
+        if (mParam1?.trim().equals(appPreference.USERID.trim())) {
             businessBinding?.linMess?.visibility = View.INVISIBLE
             businessBinding?.edit?.visibility = View.VISIBLE
             businessBinding?.imageView19?.isEnabled = true
@@ -420,6 +422,13 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
             }
         }
         getRating()
+
+        if (mParam1?.trim().equals(appPreference.USERID.trim())) {
+            Log.i("entered","entered")
+            businessBinding?.linMess?.visibility = View.INVISIBLE
+            businessBinding?.edit?.visibility = View.VISIBLE
+            businessBinding?.imageView19?.isEnabled = true
+        }
     }
 
 

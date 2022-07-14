@@ -78,7 +78,7 @@ class BlockCommentActivity: BaseActivity<ActivityBlockCommentBinding, BlockComme
                         blockCommentsAdapter=BlockCommentsAdapter(this,getShopAlbumDetailsResponse.data,this)
                         rv_block.adapter = blockCommentsAdapter
                     } else {
-                        Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show()
+
                     }
                 } else {
                     showToast(response.throwable?.message!!)

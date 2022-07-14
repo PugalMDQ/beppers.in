@@ -418,7 +418,7 @@
                     android:id="@+id/textView8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="34dp"
                     android:gravity="end"
                     android:text="@string/all_ready_have_an_account"
                     android:textColor="@color/white"
