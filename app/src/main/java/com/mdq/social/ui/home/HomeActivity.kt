@@ -69,6 +69,7 @@ import com.mdq.social.ui.models.User
 import com.mdq.social.ui.notification.NotificationActivity
 import com.mdq.social.ui.privacy.PrivacyActivity
 import com.mdq.social.ui.setting.SettingActivity
+import com.mdq.social.ui.terms.TermsAndCondition
 import com.mdq.social.utils.FileUtils
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
@@ -378,6 +379,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeNavigator>(), HomeNav
             startActivity(PrivacyActivity.getCallingIntent(this))
 
         } else if (pos == 3) {
+            val i = Intent(applicationContext, TermsAndCondition::class.java)
+            startActivity(i)
         } else if (pos == 4) {
         }
 

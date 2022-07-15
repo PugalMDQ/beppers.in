@@ -244,6 +244,7 @@ class AdapterForBookmark(
         holder.imageView59?.setOnClickListener {
             if (holder.ii == 0) {
                 holder.ii = 1
+                holder.rating?.visibility = View.VISIBLE
                 holder.delete?.visibility = View.VISIBLE
                 holder.share?.visibility = View.VISIBLE
                 if (trendingItem!!.get(position).type?.trim()!!
@@ -259,6 +260,7 @@ class AdapterForBookmark(
                 holder.delete?.visibility = View.GONE
                 holder.share?.visibility = View.GONE
                 holder.stare?.visibility = View.GONE
+                holder.rating?.visibility = View.GONE
             }
         }
 
@@ -299,6 +301,7 @@ class AdapterForBookmark(
         var SingleImage: ImageView? = null
         var share: ImageView? = null
         var stare: TextView? = null
+        var rating: TextView? = null
         var cardformuteAndUnmute: CardView? = null
 
         init {
@@ -310,6 +313,7 @@ class AdapterForBookmark(
             address = itemView.findViewById(R.id.textView94)
             share = itemView.findViewById(R.id.share)
             stare = itemView.findViewById(R.id.stare)
+            rating = itemView.findViewById(R.id.rating)
             delete = itemView.findViewById(R.id.delete)
             SingleImage = itemView.findViewById(R.id.SingleImage)
             tag = itemView.findViewById(R.id.taged)

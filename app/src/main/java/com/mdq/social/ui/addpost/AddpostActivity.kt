@@ -400,9 +400,11 @@ class   AddpostActivity : BaseActivity<ActivityAddPostBinding, AddPostNavigator>
             var uri:Uri= Uri.parse(mArrayUri!!.get(i))
             val path =
                 FileUtils.getPath(this, uri)
-            var file = File(path)
-            filess?.add(file)
-            addPostViewModel?.returnUri?.add(uri!!)
+            if(path!=null) {
+                var file = File(path)
+                filess?.add(file)
+                addPostViewModel?.returnUri?.add(uri!!)
+            }
         }
 
         addPostViewModel?.path?.addAll(filess!!)

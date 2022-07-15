@@ -251,18 +251,19 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
             holder.imageView59?.setOnClickListener {
                 if (holder.ii == 0) {
                     holder.ii = 1
+                    holder.rating?.visibility = View.VISIBLE
                     holder.delete?.visibility = View.VISIBLE
                     holder.share?.visibility = View.VISIBLE
                     if(trendingItem!!.get(position).type?.trim()!!.equals("freelancer")||trendingItem!!.get(position).type?.trim()!!.equals("business")){
                         holder.stare?.visibility = View.VISIBLE
                         clickManager.onMenuClick(position,trendingItem?.get(position).user_id!!,holder.stare!!)
-
                     }
                 } else  {
                     holder.ii = 0
                     holder.delete?.visibility = View.GONE
                     holder.share?.visibility = View.GONE
                     holder.stare?.visibility = View.GONE
+                    holder.rating?.visibility = View.GONE
                 }
             }
 
@@ -305,6 +306,7 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
             var delete: ImageView?=null
             var share: ImageView?=null
             var stare: TextView?=null
+            var rating: TextView?=null
 
             init {
                 img=itemView.findViewById(R.id.imgP)
@@ -318,6 +320,7 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
                 imageView59=itemView.findViewById(R.id.imageView59)
                 share=itemView.findViewById(R.id.share)
                 stare=itemView.findViewById(R.id.stare)
+                rating=itemView.findViewById(R.id.rating)
                 SingleImage=itemView.findViewById(R.id.SingleImage)
                 delete=itemView.findViewById(R.id.delete)
                 tag=itemView.findViewById(R.id.taged)

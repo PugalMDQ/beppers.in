@@ -202,7 +202,6 @@
                         android:background="@null"
                         android:ems="10"
                         android:hint="@string/enter_password"
-                        android:inputType="textPassword"
                         android:maxLength="10"
                         android:fontFamily="@font/gilroylight"
                         android:padding="10dp"
@@ -304,6 +303,78 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <TextView
+                    android:id="@+id/sentOTP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/ripple_otp"
+                    android:text="Send OTP"
+                    android:drawableRight="@drawable/ic_baseline_chevron_right_24"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextTextPersonName7"
+                    app:layout_constraintEnd_toEndOf="@id/CardForEditTextTextPersonName7"
+                    android:layout_marginTop="16dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/textViewOTP"
+                    style="@style/text_style_bold_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:text="OTP"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName7"
+                    app:layout_constraintTop_toBottomOf="@+id/sentOTP" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    app:cardElevation="0dp"
+                    android:visibility="gone"
+                    android:id="@+id/CardForEditTextOTP"
+                    app:layout_constraintEnd_toEndOf="@+id/CardForEditTextTextPersonName7"
+                    app:layout_constraintStart_toStartOf="@+id/CardForEditTextTextPersonName7"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewOTP"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="#66D5D5D8"
+                    app:cardCornerRadius="10dp"
+                    >
+
+                    <EditText
+                        android:id="@+id/editTextOTP"
+                        style="@style/text_style_bold_small_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:ems="10"
+                        android:hint="Enter OTP"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/white"
+                        android:text="@={signupViewModel.useremail}"
+                        />
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/VerifyOTP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/ripple_otp"
+                    android:text="Verify OTP"
+                    android:visibility="gone"
+                    android:drawableRight="@drawable/ic_baseline_chevron_right_24"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/CardForEditTextOTP"
+                    app:layout_constraintEnd_toEndOf="@id/CardForEditTextTextPersonName7"
+                    android:layout_marginTop="16dp"
+                    />
 
                 <RadioGroup
                     android:id="@+id/rdo_gender"
@@ -427,7 +498,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/textView2"
                     app:layout_constraintEnd_toStartOf="@+id/textView9"
                     app:layout_constraintStart_toStartOf="@+id/textView2"
-                    app:layout_constraintTop_toBottomOf="@+id/rdo_gender" />
+                    app:layout_constraintTop_toBottomOf="@+id/VerifyOTP" />
 
                 <TextView
                     android:id="@+id/textView9"

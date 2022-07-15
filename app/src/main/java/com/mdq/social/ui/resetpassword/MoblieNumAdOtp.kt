@@ -1,12 +1,11 @@
 package com.mdq.social.ui.resetpassword
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -52,9 +51,9 @@ class MoblieNumAdOtp : AppCompatActivity() {
                  number = activityMoblieNumAdOtp.mobileNum.text.toString()
                 if (number.length == 10) {
                     sendVerificationcode("+91" + number)
-                    Toast.makeText(this@MoblieNumAdOtp, "OTP will send to you", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MoblieNumAdOtp, "OTP sent to your mobile number.", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@MoblieNumAdOtp, "Enter correct number", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@MoblieNumAdOtp, "Enter correct mobile number.", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
@@ -117,7 +116,6 @@ class MoblieNumAdOtp : AppCompatActivity() {
                 }
             }
     }
-
 
     private fun sendVerificationcode(number: String) {
 

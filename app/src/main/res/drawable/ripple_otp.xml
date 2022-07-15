@@ -4,4 +4,8 @@
     android:color="@color/black"
     tools:targetApi="lollipop">
 
+    <item
+        android:drawable="@drawable/bg_logins"
+        />
+
 </ripple>

@@ -222,14 +222,23 @@ public class FileUtils {
                 // TODO handle non-primary volumes
             }
             // DownloadsProvider
+
             else if (isDownloadsDocument(uri)) {
+                try {
 
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                Uri contentUri = null;
+                    contentUri= ContentUris.withAppendedId(
+                            Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                 return getDataColumn(context, contentUri, null, null);
-            }
+
+                }catch (Exception e){
+
+                }
+           }
+
             // MediaProvider
             else if (isMediaDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);

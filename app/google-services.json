@@ -8,15 +8,19 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1048028913338:android:ac9bf647e402e24c15ec83",
+        "mobilesdk_app_id": "1:1048028913338:android:b2fb18a90d517c6d15ec83",
         "android_client_info": {
           "package_name": "com.mdq.social"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1048028913338-gdn15n365e2e7lc6nrp9s54vf8h8lvrm.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "1048028913338-qi7qdjli95nd5gvi1jmdp2siiqgcn981.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mdq.social",
+            "certificate_hash": "c68ae395888da86d81147313f353fcae36c60222"
+          }
         }
       ],
       "api_key": [
@@ -26,12 +30,35 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1048028913338-gdn15n365e2e7lc6nrp9s54vf8h8lvrm.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048028913338:android:ac9bf647e402e24c15ec83",
+        "android_client_info": {
+          "package_name": "com.zoodly.social"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048028913338-pnto8uvij6o5bba18ia61adcie5c2tbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zoodly.social",
+            "certificate_hash": "18d9ac868e20308496b0aa91e61adf377625ad88"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCflGJDHrmlLjbKRPl2alTp7IhssKTNJ3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }
