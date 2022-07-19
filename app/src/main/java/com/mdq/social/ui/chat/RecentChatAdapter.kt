@@ -24,7 +24,9 @@ class RecentChatAdapter(
     var username: String,
     var FFRomID: String,
     var clk: click,
-    var data1: List<count>?
+    var data1: List<count>?,
+    var boolean: Boolean,
+    var values: String?
 ) :
     RecyclerView.Adapter<RecentChatAdapter.RecHolder>() {
 
@@ -120,7 +122,7 @@ class RecentChatAdapter(
 
                 }
                 intent.putExtra("Blockedid", data.get(absoluteAdapterPosition)?.chat_block?.trim())
-
+                 intent.putExtra("values", values)
                 context.startActivity(intent)
             }else{
                 var intent: Intent = Intent(context, LiveChatActivity::class.java)
@@ -137,6 +139,7 @@ class RecentChatAdapter(
                 }
                 intent.putExtra("Blockedid", data.get(absoluteAdapterPosition)?.chat_block?.trim())
 
+                    intent.putExtra("values", values)
                 context.startActivity(intent)
             }
         }

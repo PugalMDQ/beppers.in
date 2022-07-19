@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.AuthFailureError
@@ -39,15 +43,18 @@ import com.mdq.social.app.helper.appsignature.AppSignatureHelper.Companion.TAG
 import com.mdq.social.base.BaseFragment
 import com.mdq.social.databinding.FragmentHomeBinding
 import com.mdq.social.ui.Firebase.Constants
+import com.mdq.social.ui.chat.ChatFragment
 import com.mdq.social.ui.models.User
 import com.mdq.social.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
 import org.json.JSONObject
+import pl.droidsonroids.gif.GifDrawable
+import pl.droidsonroids.gif.GifImageView
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNavigator,
-    HomeAdapter.ClickManager {
+    HomeAdapter.ClickManager,HomeAdapter.share {
 
     private var homeViewModel: HomeViewModel? = null
     private var homeBinding: FragmentHomeBinding? = null
@@ -57,6 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
     private var bottomSheetDialog: BottomSheetDialog? = null
 
     var fanduf: Int = 0
+    var PostID: String  ?= null
     var positions: Int? = null
     var profile: ImageView? = null
 
@@ -81,7 +89,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
         homeBinding?.homeViewModel = homeViewModel
         homeViewModel?.navigator = this
         homeAdapter =
-            homeViewModel?.let { HomeAdapter(requireContext(), this, it, appPreference.USERID) }
+            homeViewModel?.let { HomeAdapter(requireContext(), this, this , it, appPreference.USERID) }
         rv_home.adapter = homeAdapter
         rv_home.adapter = homeAdapter
         rv_home.setHasFixedSize(true)
@@ -222,8 +230,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
         tvLikeCount: TextView,
         recentItem: DataItem,
         active: String,
-        no_of_like: String
+        no_of_like: String,
+        gifHeart: GifImageView
     ) {
+
+        hideLoading()
         positions = position
         if (imageView32.getTag().equals("Unliked")) {
             homeViewModel!!.getAddLikeComments(
@@ -237,9 +248,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
                         if (addLikeCommentsResponse != null) {
                             if (addLikeCommentsResponse.message.equals("Like added successfully!")) {
 
+//                                val gib = gifHeart
+//                                requireActivity().setContentView(gib)
+//                                gib.setImageResource(R.drawable.heart)
+//                                val mc = MediaController(requireActivity())
+//                                mc.setMediaPlayer(gib.drawable as GifDrawable)
+//                                mc.setAnchorView(gib)
+
                                 imageView32.setImageResource(R.drawable.ic_heart_1fill)
 //                                getRecent(appPreference.USERID)
                                 imageView32.setTag("Liked")
+                                gifHeart.visibility=View.VISIBLE
+                                val gifFromResource = GifDrawable(resources, R.drawable.heart)
+                                gifHeart.setImageDrawable(gifFromResource)
+                                Handler().postDelayed({
+                                            gifFromResource.stop()
+                                    gifHeart.visibility=View.INVISIBLE
+                                }, 600)
 
                                 updtedLikeUnLike(tvLikeCount, recentItem.id.toString())
                                 prepareNotificationMessage(
@@ -256,24 +281,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
                     }
                 })
         } else if (imageView32.getTag().equals("Liked")) {
-                homeViewModel!!.getAddUnLikeComments(
-                    recentItem.id.toString(),
-                    recentItem.user_id.toString(),
-                    active
-                )
-                    .observe(requireActivity(), Observer { response ->
-                        if (response?.data != null) {
-                            val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
-                            if (addLikeCommentsResponse != null) {
-                                if (addLikeCommentsResponse.message.equals("Like removed successfully!")) {
-                                    imageView32.setImageResource(R.drawable.ic_heart_1__1_)
+            homeViewModel!!.getAddUnLikeComments(
+                recentItem.id.toString(),
+                recentItem.user_id.toString(),
+                active
+            )
+                .observe(requireActivity(), Observer { response ->
+                    if (response?.data != null) {
+                        val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
+                        if (addLikeCommentsResponse != null) {
+                            if (addLikeCommentsResponse.message.equals("Like removed successfully!")) {
+                                imageView32.setImageResource(R.drawable.ic_heart_1__1_)
 //                                    getRecent(appPreference.USERID)
-                                    updtedLikeUnLike(tvLikeCount, recentItem.id.toString())
-                                    imageView32.setTag("Unliked")
-                                }
+                                updtedLikeUnLike(tvLikeCount, recentItem.id.toString())
+                                imageView32.setTag("Unliked")
                             }
                         }
-                    })
+                    }
+                })
         }
     }
 
@@ -517,5 +542,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeNavigator>(), HomeNav
                 showToast(response.throwable?.message!!)
             }
         }
+    }
+
+    override fun sharing(postid: String) {
+        this.PostID=postid
+        loadFragment(ChatFragment())
+    }
+    private fun loadFragment(fragment: Fragment) {
+        var fragmentManager: FragmentManager? = requireActivity().supportFragmentManager
+
+        val bundle = Bundle()
+        bundle.putString("edttext", PostID)
+
+        val fragmentTransaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+        fragmentTransaction.replace(R.id.nav_home_fragment, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragment.arguments = bundle
+        fragmentTransaction.commit()
+
     }
 }

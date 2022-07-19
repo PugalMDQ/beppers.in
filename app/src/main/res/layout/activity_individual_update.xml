@@ -301,6 +301,7 @@
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:maxLength="120"
+                            android:maxLines="3"
                             android:hint="@string/description"
                             android:padding="15dp"
                             android:textColor="@android:color/white"

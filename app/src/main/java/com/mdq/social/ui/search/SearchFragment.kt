@@ -112,6 +112,7 @@ class SearchFragment: BaseFragment<FragmentSearchBinding, SearchNavigator>(),
                 }
             }
         })
+
         }
 
     private fun amIConnected(): Boolean {
@@ -194,11 +195,11 @@ class SearchFragment: BaseFragment<FragmentSearchBinding, SearchNavigator>(),
     }
 
     override fun searchClick() {
+
         if(!appPreference.ADMINBLOCK.equals("1")) {
             NavHostFragment.findNavController(requireParentFragment())
                 .navigate(R.id.navigation_search_details)
         }
-
     }
 
     override fun onItemLickClick(position: Int, imageView32: ImageView, textView96: TextView, recentItem: RecommendedItem) {
@@ -215,14 +216,11 @@ class SearchFragment: BaseFragment<FragmentSearchBinding, SearchNavigator>(),
                     val addLikeCommentsResponse = response.data as AddLikeCommentsResponse
                     if (addLikeCommentsResponse != null) {
                         if (recentItem.like == 1) {
-
                             recentItem.totalLike =recentItem.totalLike?.minus(1)
                             imageView32.setImageResource(R.drawable.ic_empty_heart)
                             textView96.setText((recentItem.totalLike).toString())
                             recentItem.like=0
-
                         } else {
-
                             recentItem.totalLike =recentItem.totalLike?.plus(1)
                             imageView32.setImageResource(R.drawable.ic_heart)
                             textView96.setText((recentItem.totalLike).toString())

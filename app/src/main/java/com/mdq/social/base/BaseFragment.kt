@@ -71,10 +71,10 @@ abstract class BaseFragment<VB : ViewDataBinding, V : Any> : DaggerFragment() {
     }
 
     protected fun showLoading() {
-        baseBinding!!.includProgress.progressBar.visibility = View.VISIBLE
+//        baseBinding!!.includProgress.progressBar.visibility = View.VISIBLE
     }
 
-    protected fun hideLoading() {
+    public fun hideLoading() {
         baseBinding!!.includProgress.progressBar.visibility = View.INVISIBLE
     }
 

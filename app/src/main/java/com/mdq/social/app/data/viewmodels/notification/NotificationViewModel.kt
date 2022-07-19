@@ -80,6 +80,28 @@ class NotificationViewModel @Inject constructor() :BaseViewModel<NotificationNav
         return responseBody
     }
 
+    fun getSharedPost(postid: String?): MutableLiveData<AppResponse<Any>> {
+
+        val responseBody = MutableLiveData<AppResponse<Any>>()
+        val hashMap = HashMap<String, String>()
+        hashMap.put("user_id", appPreference.USERID)
+        hashMap.put("post_id", postid!!)
+        api.getShredPostlist(hashMap)
+            .compose(RxJavaUtils.applyObserverSchedulers())
+            .compose(RxJavaUtils.applyErrorTransformer())
+            .doOnSubscribe { loadingStatus.value = true }
+            .doOnTerminate { loadingStatus.value = false }
+            .subscribe({ response ->
+                if (response != null) {
+                    responseBody.value = AppResponse.success(response)
+                }
+            }, { throwable ->
+                responseBody.value = AppResponse.error(throwable)
+            })
+
+        return responseBody
+    }
+
 
     fun getRating(user_id: String): MutableLiveData<AppResponse<Any>> {
         val responseBody = MutableLiveData<AppResponse<Any>>()

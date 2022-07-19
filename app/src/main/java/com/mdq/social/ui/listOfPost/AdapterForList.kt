@@ -21,6 +21,7 @@ import com.mdq.social.app.data.response.user_profile.UserProfileResponse
 import com.mdq.social.ui.home.SliderAdapter2
 import com.mdq.social.ui.post.PostActivity
 import com.mdq.social.ui.profile.ProfileActivity
+import pl.droidsonroids.gif.GifImageView
 
 class AdapterForList(
     var context: Context,
@@ -49,7 +50,7 @@ class AdapterForList(
     }
 
     interface like{
-        fun like(id:String,user_id:String,image:ImageView,no_of_like:String,position: Int,active:String,textView:TextView?)
+        fun like(id:String,user_id:String,image:ImageView,no_of_like:String,position: Int,active:String,textView:TextView?,gifImageView: GifImageView?)
     }
 
     override fun onBindViewHolder(holder: mine, position: Int) {
@@ -216,6 +217,7 @@ class AdapterForList(
                 else{
                     "0"
                 },holder.Likecount
+            ,holder.heart
             )
         }
     }
@@ -244,6 +246,7 @@ class AdapterForList(
         var delete:ImageView?=null
         var menu:ImageView?=null
         var comment:ImageView?=null
+        var heart:GifImageView?=null
         var cardformuteAndUnmute:CardView?=null
 
     init {
@@ -253,6 +256,7 @@ class AdapterForList(
         desc=itemView.findViewById(R.id.textView95)
         name=itemView.findViewById(R.id.textView92)
         tag=itemView.findViewById(R.id.taged)
+        heart=itemView.findViewById(R.id.heart)
         tagedc=itemView.findViewById(R.id.tagedc)
         like=itemView.findViewById(R.id.imageView32)
         bookmark=itemView.findViewById(R.id.imageView34)

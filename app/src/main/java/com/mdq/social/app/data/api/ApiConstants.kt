@@ -85,6 +85,9 @@ object ApiConstants {
     /*Bookmark*/
     const val API_BOOKMARKLIST = "users/bookmarks"
 
+    /*shared post*/
+    const val API_GETSHARED_POST = "getpost"
+
     /*Follow Reviews*/
     const val API_FOLLOW_REVIEWS = "follow"
 

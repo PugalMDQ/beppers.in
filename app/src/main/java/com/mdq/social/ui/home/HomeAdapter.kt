@@ -26,11 +26,13 @@ import android.annotation.SuppressLint
 import android.os.*
 import android.media.MediaPlayer
 import android.media.MediaPlayer.OnPreparedListener
+import pl.droidsonroids.gif.GifImageView
 
 
 class HomeAdapter(
     val context: Context,
     var clickManager: ClickManager,
+    var shares: share,
     var homeViewModel: HomeViewModel,
     var user_id: String
 ) : AAH_VideosAdapter() {
@@ -40,15 +42,20 @@ class HomeAdapter(
     init {
         recentItem = ArrayList()
     }
+    interface share{
+        fun sharing(postid: String)
+    }
 
     interface ClickManager {
+
         fun onItemLickClick(
             position: Int,
             imageView32: ImageView,
             tvLikeCount: TextView,
             get: DataItem,
             active: String,
-            no_of_like: String
+            no_of_like: String,
+            gifHeart:GifImageView
         )
 
         fun onItemSubscribeClick(position: Int, get: DataItem, imageView: ImageView)
@@ -179,6 +186,7 @@ class HomeAdapter(
         } else {
             holder.getBinding()?.textView95.visibility = View.GONE
         }
+
         if (!item.taguser.isNullOrEmpty()) {
             holder.getBinding()?.taged.visibility = View.VISIBLE
             holder.getBinding()?.tagedc.visibility = View.VISIBLE
@@ -239,7 +247,8 @@ class HomeAdapter(
                 } else {
                     "0"
                 },
-                recentItem!!.get(position).no_of_likes!!
+                recentItem!!.get(position).no_of_likes!!,
+                binding.getBinding().heart
             )
             var vibration = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
             if (Build.VERSION.SDK_INT >= 26) {
@@ -289,6 +298,11 @@ class HomeAdapter(
                 position,
                 recentItem!!.get(position).user_id!!
             )
+        }
+
+        //sharing
+        holder.getBinding().share.setOnClickListener {
+            shares.sharing(recentItem!!.get(position).id.toString())
         }
 
         holder.getBinding().imageView34.setOnClickListener {

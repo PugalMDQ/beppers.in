@@ -197,7 +197,7 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
                 getChatBlockStatus()
             }
         }
-        if(mParam1.isNullOrEmpty()){
+        if (mParam1.isNullOrEmpty()) {
             businessBinding?.linMess?.visibility = View.INVISIBLE
         }
         if (mParam1?.trim().equals(appPreference.USERID.trim())) {
@@ -239,7 +239,6 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
                 Intent.createChooser(intent, "Select Picture"),
                 232
             )
-
         }
 
         //for message
@@ -424,7 +423,7 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
         getRating()
 
         if (mParam1?.trim().equals(appPreference.USERID.trim())) {
-            Log.i("entered","entered")
+            Log.i("entered", "entered")
             businessBinding?.linMess?.visibility = View.INVISIBLE
             businessBinding?.edit?.visibility = View.VISIBLE
             businessBinding?.imageView19?.isEnabled = true
@@ -460,9 +459,11 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
                 if (response.data != null) {
                     val status = response.data as ChatBlockedStatus
                     if (status.data != null) {
-                        if (status.data!!.get(0)?.chat_block!!.trim().equals(appPreference.USERID.trim())) {
+                        if (status.data!!.get(0)?.chat_block!!.trim()
+                                .equals(appPreference.USERID.trim())
+                        ) {
                             businessBinding?.textView50?.isClickable = false
-                            businessBinding?.textView50?.alpha=.5f
+                            businessBinding?.textView50?.alpha = .5f
                         }
                     }
                 }
@@ -1214,6 +1215,10 @@ class BusinessProfileFragment : BaseFragment<FragmentBusinessBinding, BusinessPr
                     token?.continuePermissionRequest()
                 }
             }).check()
+    }
+
+    override fun revieadded() {
+        getRating()
     }
 
     private fun showPictureDialog() {

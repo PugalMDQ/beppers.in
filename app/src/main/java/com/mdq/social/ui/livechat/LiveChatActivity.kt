@@ -26,7 +26,6 @@ import com.google.firebase.messaging.ktx.messaging
 import com.mdq.social.BR
 import com.mdq.social.PreferenceManager
 import com.mdq.social.R
-import com.mdq.social.app.data.response.chatBlockStatus.ChatBlockedStatus
 import com.mdq.social.app.data.response.livechat.LiveChatResponse
 import com.mdq.social.app.data.response.signup.SignupResponse
 import com.mdq.social.app.data.viewmodels.base.BaseViewModel
@@ -38,6 +37,7 @@ import com.mdq.social.ui.Firebase.Constants
 import com.mdq.social.ui.chat.ChatFragment
 import com.mdq.social.ui.home.HomeActivity
 import com.mdq.social.ui.models.ChatMessage
+import com.mdq.social.ui.notification.NotificationActivity
 import com.mdq.social.ui.profile.ProfileActivity
 import com.mdq.social.utils.DateUtils.getFormattedTimeChatLog
 import com.xwray.groupie.GroupAdapter
@@ -73,7 +73,7 @@ class LiveChatActivity : BaseActivity<ActivityLiveChatBinding, LiveChatNavigator
     private val SWIPE_VELOCITY_THRESHOLD = 100
     var Blocked: Boolean = true
     var cc: ChatMessage? = null
-
+    var values:String?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_live_chat
     }
@@ -101,6 +101,12 @@ class LiveChatActivity : BaseActivity<ActivityLiveChatBinding, LiveChatNavigator
         Blockedid = intent.getStringExtra("Blockedid").toString()
         image = intent.getStringExtra("image").toString()
         ToFireBaseID = intent.getStringExtra("ToFireBaseID").toString()
+        values=intent.getStringExtra("values").toString()
+
+        if(!values.isNullOrEmpty() && !values.equals("null")){
+            activityLiveChatBinding!!.edtMessage.setText("https://Beppers:SharedPost:"+values)
+            ChatFragment().strtext=""
+        }
 
         if (TO.trim().equals(Blockedid.trim())) {
             activityLiveChatBinding?.Mute?.setImageDrawable(resources.getDrawable(R.drawable.ic_mo_unblockmsg))
@@ -547,6 +553,11 @@ class LiveChatActivity : BaseActivity<ActivityLiveChatBinding, LiveChatNavigator
                 viewHolder.itemView.TO_DATE.visibility = View.GONE
                 viewHolder.itemView.textView72.visibility = View.GONE
                 viewHolder.itemView.textView68.text = text
+                if(text.contains("https://Beppers:SharedPost:")){
+                    viewHolder.itemView.textView68.visibility = View.INVISIBLE
+                    viewHolder.itemView.textViewshareFrom.visibility=View.VISIBLE
+                    viewHolder.itemView.textViewshareFrom.text=text
+                }
             } else if (to.trim().equals(Ffromif.trim())) {
                 viewHolder.itemView.textView68.visibility = View.GONE
                 viewHolder.itemView.FROM_DATE.visibility = View.GONE
@@ -554,11 +565,33 @@ class LiveChatActivity : BaseActivity<ActivityLiveChatBinding, LiveChatNavigator
                 viewHolder.itemView.TO_DATE.visibility = View.VISIBLE
                 viewHolder.itemView.TO_DATE.setText(getFormattedTimeChatLog(timestamp1))
                 viewHolder.itemView.textView72.text = text
+                if(text.contains("https://Beppers:SharedPost:")){
+                    viewHolder.itemView.textView72.visibility = View.INVISIBLE
+                    viewHolder.itemView.textView72share.visibility=View.VISIBLE
+                    viewHolder.itemView.textView72share.text=text
+
+                }
             } else {
                 viewHolder.itemView.textView68.visibility = View.GONE
                 viewHolder.itemView.FROM_DATE.visibility = View.GONE
                 viewHolder.itemView.textView72.visibility = View.GONE
                 viewHolder.itemView.TO_DATE.visibility = View.GONE
+            }
+            viewHolder.itemView.textView72share.setOnClickListener {
+                var str=viewHolder.itemView.textView72share.text.toString()
+                var strNew: String = str.replace("https://Beppers:SharedPost:", "")
+                strNew=strNew.toString().trim()
+
+                        context.startActivity(Intent(context,NotificationActivity::class.java)
+                            .putExtra("sharedPost",strNew))
+            }
+
+            viewHolder.itemView.textViewshareFrom.setOnClickListener {
+                var str=viewHolder.itemView.textViewshareFrom.text.toString()
+                val strNew: String = str.replace("https://Beppers:SharedPost:", "")
+
+                        context.startActivity(Intent(context,NotificationActivity::class.java)
+                            .putExtra("sharedPost",strNew))
             }
 
             viewHolder.itemView.textView68.setOnLongClickListener {
@@ -582,7 +615,54 @@ class LiveChatActivity : BaseActivity<ActivityLiveChatBinding, LiveChatNavigator
                     deleteChats(chatMessage!!.get(position), position)
                     dialoglogout.dismiss()
                 }
+                true
+            }
 
+            viewHolder.itemView.textViewshareFrom.setOnLongClickListener {
+                val dialoglogout = Dialog(context, R.style.dialog_center)
+                dialoglogout.setCancelable(false)
+                dialoglogout.setContentView(R.layout.dialog_logout)
+                dialoglogout.show()
+                val textView23 = dialoglogout.textView23
+                val textView21 = dialoglogout.textView21
+                val textView22 = dialoglogout.textView22
+                val textView24 = dialoglogout.textView24
+
+                textView21.setText("Delete")
+                textView22.setText("Do you want to delete?")
+
+                textView23.setOnClickListener {
+                    dialoglogout.dismiss()
+                }
+
+                textView24.setOnClickListener {
+                    deleteChats(chatMessage!!.get(position), position)
+                    dialoglogout.dismiss()
+                }
+                true
+            }
+
+            viewHolder.itemView.textViewshareFrom.setOnLongClickListener {
+                val dialoglogout = Dialog(context, R.style.dialog_center)
+                dialoglogout.setCancelable(false)
+                dialoglogout.setContentView(R.layout.dialog_logout)
+                dialoglogout.show()
+                val textView23 = dialoglogout.textView23
+                val textView21 = dialoglogout.textView21
+                val textView22 = dialoglogout.textView22
+                val textView24 = dialoglogout.textView24
+
+                textView21.setText("Delete")
+                textView22.setText("Do you want to delete?")
+
+                textView23.setOnClickListener {
+                    dialoglogout.dismiss()
+                }
+
+                textView24.setOnClickListener {
+                    deleteChats(chatMessage!!.get(position), position)
+                    dialoglogout.dismiss()
+                }
                 true
             }
             val fragment = ChatFragment()

@@ -215,6 +215,10 @@ interface AppApi {
     fun getBookMarklist(@HeaderMap hashmap: HashMap<String, String>): Observable<BookMarkListResponse>
 
     @FormUrlEncoded
+    @POST(ApiConstants.API_GETSHARED_POST)
+    fun getShredPostlist(@FieldMap hashmap: HashMap<String, String>): Observable<RecentResponse>
+
+    @FormUrlEncoded
     @POST(ApiConstants.API_FOLLOW_REVIEWS)
     fun getFollowReviews(@FieldMap hashmap: HashMap<String, String>): Observable<UserProfileResponse>
 

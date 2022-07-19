@@ -436,6 +436,7 @@
                         android:focusable="true"
                         android:hint="@string/description"
                         android:maxLength="120"
+                        android:maxLines="3"
                         android:padding="15dp"
                         android:text="@={freelanceUpdateViewModel.description}"
                         android:textColor="@android:color/white"

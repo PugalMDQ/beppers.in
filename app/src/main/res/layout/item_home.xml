@@ -90,6 +90,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+
+
+
                     <com.smarteist.autoimageslider.SliderView
                         android:id="@+id/image_slider"
                         android:layout_width="match_parent"
@@ -132,6 +135,17 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/heart"
+                        />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardformuteAndUnmute"

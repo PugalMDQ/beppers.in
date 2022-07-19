@@ -38,8 +38,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.gowtham.library.utils.LogMessage
 import com.gowtham.library.utils.TrimType
 import com.gowtham.library.utils.TrimVideo
@@ -54,18 +52,14 @@ import com.mdq.social.R
 import com.mdq.social.app.data.app.AppConstants
 import com.mdq.social.app.data.response.UserProfileDetailResponse.UserProfileDetailResponse
 import com.mdq.social.app.data.response.navigationmenu.NevigationMenuItem
-import com.mdq.social.app.data.response.signup.SignupResponse
 import com.mdq.social.app.data.viewmodels.base.BaseViewModel
 import com.mdq.social.app.data.viewmodels.home.HomeViewModel
-import com.mdq.social.app.helper.appsignature.AppSignatureHelper
 import com.mdq.social.app.helper.filecompressor.FileCompressor
 import com.mdq.social.base.BaseActivity
 import com.mdq.social.databinding.ActivityHomeBinding
 import com.mdq.social.ui.addpost.AddpostActivity
 import com.mdq.social.ui.bookmark.BookMarkActivity
 import com.mdq.social.ui.chat.ChatFragment
-import com.mdq.social.ui.login.LoginActivity
-import com.mdq.social.ui.models.User
 import com.mdq.social.ui.notification.NotificationActivity
 import com.mdq.social.ui.privacy.PrivacyActivity
 import com.mdq.social.ui.setting.SettingActivity
@@ -114,7 +108,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeNavigator>(), HomeNav
     private var preferenceManager: PreferenceManager? = null
     private var fragmentManager: FragmentManager? = null
 
+    var PostID:String?=""
     var draw:Boolean=true
+    var share:Boolean=true
+
     override fun getLayoutId(): Int {
         return R.layout.activity_home
     }
@@ -142,6 +139,18 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeNavigator>(), HomeNav
             this.contentResolver,
             Secure.ANDROID_ID
         )
+        try {
+            PostID = intent!!.extras!!.getString("values").toString()
+
+            if (!PostID.isNullOrEmpty()) {
+                CardForimg_menu.visibility = View.GONE
+                CardForimg_notification.visibility = View.GONE
+                share=false
+                loadFragment(ChatFragment())
+            }
+        }catch (e:Exception){
+
+        }
 
         fragmentManager = supportFragmentManager
 
@@ -214,10 +223,32 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeNavigator>(), HomeNav
         img_setting.setOnClickListener {
             startActivity(Intent(this@HomeActivity, SettingActivity::class.java))
         }
-
         setupNavigationUI()
 
+
+     try{   if (!PostID.isNullOrEmpty()) {
+         CardForimg_menu.visibility = View.GONE
+         CardForimg_notification.visibility = View.GONE
+     }
+        }catch (e:Exception){
+
+        }
     }
+    private fun loadFragment(fragment: Fragment) {
+        var fragmentManager: FragmentManager? =supportFragmentManager
+
+        val bundle = Bundle()
+        bundle.putString("edttext", PostID)
+
+        val fragmentTransaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+        fragmentTransaction.replace(R.id.nav_home_fragment, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragment.arguments = bundle
+        fragmentTransaction.commit()
+
+
+    }
+
 
     private fun getProfile() {
         homeViewModel!!.getUserProfileDetails(
@@ -333,9 +364,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeNavigator>(), HomeNav
                 CardForimg_notification.visibility = View.INVISIBLE
             }
             R.id.navigation_home -> {
-                CardForimg_menu.visibility = View.VISIBLE
-                img_notification.setImageResource(R.drawable.ic_home_notification)
-                CardForimg_notification.visibility = View.VISIBLE
+                if(share) {
+                    CardForimg_menu.visibility = View.VISIBLE
+                    img_notification.setImageResource(R.drawable.ic_home_notification)
+                    CardForimg_notification.visibility = View.VISIBLE
+                }
             }
             R.id.navigation_chat -> {
                 CardForimg_menu.visibility = View.GONE
@@ -580,11 +613,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeNavigator>(), HomeNav
         return preferenceManager
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val fragmentTransaction: FragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.replace(R.id.nav_home_fragment, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
+
 
 }

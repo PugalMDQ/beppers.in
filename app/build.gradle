@@ -1,4 +1,4 @@
- plugins {
+plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
@@ -46,7 +46,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding{
+    dataBinding {
         enabled true
     }
     buildFeatures {
@@ -169,8 +169,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.google.android.gms:play-services-location:19.0.0'
 
-        //For country code picker
-        implementation 'com.github.joielechong:countrycodepicker:2.4.2'
+    //For country code picker
+    implementation 'com.github.joielechong:countrycodepicker:2.4.2'
 
     //For image zooming
     implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
@@ -178,4 +178,8 @@ dependencies {
     // Groupie - for complex recycler views
     implementation "com.xwray:groupie:2.1.0"
 
-    }
+    //Gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+
+
+}

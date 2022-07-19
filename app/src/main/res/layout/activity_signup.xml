@@ -357,7 +357,6 @@
                         android:padding="10dp"
                         android:textColor="@android:color/white"
                         android:textColorHint="@color/white"
-                        android:text="@={signupViewModel.useremail}"
                         />
                 </androidx.cardview.widget.CardView>
                 <TextView

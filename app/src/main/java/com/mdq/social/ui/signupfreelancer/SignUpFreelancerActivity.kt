@@ -26,6 +26,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
@@ -45,7 +46,11 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.chip.Chip
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -89,6 +94,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class SignUpFreelancerActivity :
@@ -122,7 +128,15 @@ class SignUpFreelancerActivity :
     var category = ""
     var dialoglogout:Dialog?=null
     var USERID:String?=null
-
+    var OTP:Boolean=false
+    private lateinit var forceResendingToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var mCallBack: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var mFireBaseId: String
+    lateinit var storedVerificationId: String
+    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    lateinit var auth: FirebaseAuth
+    var number: String=""
     private var fileList = ArrayList<FileItem>()
 
     override fun getLayoutId(): Int {
@@ -145,6 +159,33 @@ class SignUpFreelancerActivity :
         activitySignupFreelancerBinding?.signupFreelancerviewmodel = signupFreelancerModel
         signupFreelancerModel?.navigator = this
 
+        auth= FirebaseAuth.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        mCallBack = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+            }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+                Log.i("gg", "" + e)
+                Toast.makeText(applicationContext, "" + e, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+
+                Log.d("TAG", "onCodeSent:$verificationId")
+                storedVerificationId = verificationId
+                resendToken = token
+                activitySignupFreelancerBinding!!.textViewOTP.visibility = View.VISIBLE
+                activitySignupFreelancerBinding!!.CardForEditTextOTP.visibility = View.VISIBLE
+                activitySignupFreelancerBinding!!.VerifyOTP.visibility = View.VISIBLE
+
+            }
+        }
 
 //        getWindow().setFlags(
 //            WindowManager.LayoutParams.FLAG_SECURE,
@@ -197,6 +238,31 @@ class SignUpFreelancerActivity :
     }
     @SuppressLint("ClickableViewAccessibility")
     private fun CardElevation() {
+        activitySignupFreelancerBinding!!.sentOTP.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                number = activitySignupFreelancerBinding!!.editTextTextPersonName7.text.toString()
+                if (number.length == 10) {
+                    sendVerificationcode("+91" + number)
+                    Toast.makeText(this@SignUpFreelancerActivity, "OTP sent to your mobile number.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@SignUpFreelancerActivity, "Enter correct mobile number.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        })
+
+        activitySignupFreelancerBinding!!.VerifyOTP.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                if (activitySignupFreelancerBinding!!.editTextOTP.text.length == 6) {
+                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                        storedVerificationId, activitySignupFreelancerBinding!!.editTextOTP
+                            .text.toString()
+                    )
+                    signInWithPhoneAuthCredential(credential)
+                }
+            }
+        })
+
         activitySignupFreelancerBinding!!.editTextTextPersonName.setOnTouchListener(@SuppressLint("ClickableViewAccessibility")
         object :View.OnTouchListener{
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -480,6 +546,12 @@ class SignUpFreelancerActivity :
             showToast(getString(R.string.please_enter_phone))
             return
         }
+
+        if(!OTP){
+            showToast("Please validate your mobile number.")
+            return
+        }
+
 
 //        if (signupFreelancerModel?.pincode?.get().isNullOrEmpty()) {
 //            showToast(getString(R.string.please_enter_pincode))
@@ -1130,6 +1202,32 @@ class SignUpFreelancerActivity :
         }
 
     }
+
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this,"Verified", Toast.LENGTH_SHORT).show()
+
+                    OTP=true
+                } else {
+                    Toast.makeText(this,"Invalid OTP", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun sendVerificationcode(number: String) {
+
+        val options = PhoneAuthOptions.newBuilder(firebaseAuth)
+            .setPhoneNumber(number) // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this) // Activity (for callback binding)
+            .setCallbacks(mCallBack)// OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+
+    }
+
 
     fun bitmapToFile(
         context: Context?,

@@ -23,9 +23,12 @@ import com.mdq.social.ui.home.SliderAdapter2
 import com.mdq.social.ui.post.PostActivity
 import com.mdq.social.ui.profile.ProfileActivity
 import org.w3c.dom.Text
+import pl.droidsonroids.gif.GifImageView
 
 class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataItem>, var position:Int,var clickManager:ClickManager,var user_id:String): RecyclerView.Adapter<AdapterForTrendingPost.mine>() {
     interface ClickManager {
+        fun sharing(postid: String)
+
         fun onItemLickClick(
             position: Int,
             imageView32: ImageView,
@@ -33,7 +36,8 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
             get: DataItem,
             active: String,
             no_of_like: String,
-            textView:TextView?
+            textView:TextView?,
+            gifImageView: GifImageView?
         )
         fun saveBookmark(postid: String, position: Int, userId: String?,who:String)
 
@@ -78,9 +82,12 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
                 }
             }
 
-                if(trendingItem!=null) {
+            //sharing
+            holder.share?.setOnClickListener {
+                clickManager.sharing(trendingItem!!.get(position).id.toString())
+            }
 
-
+            if(trendingItem!=null) {
                     if(!trendingItem?.get(position)?.description.isNullOrEmpty()){
                         holder.desc?.visibility=View.VISIBLE
                     }else{
@@ -151,7 +158,8 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
                                     "0"
                                 },
                                 trendingItem!!.get(position).no_of_likes!!,
-                                holder.Likecount
+                                holder.Likecount,
+                                holder.heart
                             )
                             var vibration = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                             if (Build.VERSION.SDK_INT >= 26) {
@@ -306,6 +314,7 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
             var delete: ImageView?=null
             var share: ImageView?=null
             var stare: TextView?=null
+            var heart: GifImageView?=null
             var rating: TextView?=null
 
             init {
@@ -315,6 +324,7 @@ class AdapterForTrendingPost (var context: Context,var trendingItem:List<DataIte
                 desc=itemView.findViewById(R.id.textView95)
                 name=itemView.findViewById(R.id.textView92)
                 like=itemView.findViewById(R.id.imageView32)
+                heart=itemView.findViewById(R.id.heart)
                 address=itemView.findViewById(R.id.textView94)
                 Bookmark=itemView.findViewById(R.id.imageView34)
                 imageView59=itemView.findViewById(R.id.imageView59)

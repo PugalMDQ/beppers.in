@@ -41,7 +41,11 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.chip.Chip
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -89,6 +93,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class SignUpBusinessActivity :
@@ -135,6 +140,15 @@ class SignUpBusinessActivity :
     var category = ""
     var dialoglogout:Dialog?=null
     var USERID:String?=null
+    private lateinit var forceResendingToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var mCallBack: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var mFireBaseId: String
+    lateinit var storedVerificationId: String
+    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    lateinit var auth: FirebaseAuth
+    var number: String=""
+    var OTP:Boolean=false
 
     override fun getLayoutId(): Int {
         return R.layout.activity_signup_business
@@ -164,6 +178,8 @@ class SignUpBusinessActivity :
         cb_sunday.setOnCheckedChangeListener(this)
         fileList.clear()
 
+        auth= FirebaseAuth.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
 //        getWindow().setFlags(
 //            WindowManager.LayoutParams.FLAG_SECURE,
 //            WindowManager.LayoutParams.FLAG_SECURE);
@@ -176,6 +192,31 @@ class SignUpBusinessActivity :
             .allowMultiple(true)
             .setStateHandler(this)
             .build()
+
+        mCallBack = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+            }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+                Log.i("gg", "" + e)
+                Toast.makeText(applicationContext, "" + e, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+
+                Log.d("TAG", "onCodeSent:$verificationId")
+                storedVerificationId = verificationId
+                resendToken = token
+                activitySignUpBusinessBinding!!.textViewOTP.visibility = View.VISIBLE
+                activitySignUpBusinessBinding!!.CardForEditTextOTP.visibility = View.VISIBLE
+                activitySignUpBusinessBinding!!.VerifyOTP.visibility = View.VISIBLE
+
+            }
+        }
 
         activitySignUpBusinessBinding!!.nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { nestedScrollView, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (scrollY > oldScrollY) {
@@ -370,6 +411,32 @@ class SignUpBusinessActivity :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun CardElevation() {
+
+        activitySignUpBusinessBinding!!.sentOTP.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                number = activitySignUpBusinessBinding!!.editTextTextPersonName7.text.toString()
+                if (number.length == 10) {
+                    sendVerificationcode("+91" + number)
+                    Toast.makeText(this@SignUpBusinessActivity, "OTP sent to your mobile number.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@SignUpBusinessActivity, "Enter correct mobile number.", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        })
+
+        activitySignUpBusinessBinding!!.VerifyOTP.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                if (activitySignUpBusinessBinding!!.editTextOTP.text.length == 6) {
+                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                        storedVerificationId, activitySignUpBusinessBinding!!.editTextOTP
+                            .text.toString()
+                    )
+                    signInWithPhoneAuthCredential(credential)
+                }
+            }
+        })
+
         activitySignUpBusinessBinding!!.editTextTextPersonName.setOnTouchListener(@SuppressLint("ClickableViewAccessibility")
         object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -837,6 +904,10 @@ class SignUpBusinessActivity :
             showToast(getString(R.string.invalid_email))
             return
         }
+        if(!OTP){
+            showToast("Please validate your mobile number.")
+            return
+        }
 
 //        if (signupBusinessModel?.pincode?.get().isNullOrEmpty()) {
 //            showToast(getString(R.string.please_enter_pincode))
@@ -1202,7 +1273,30 @@ class SignUpBusinessActivity :
 
 
     }
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this,"Verified", Toast.LENGTH_SHORT).show()
 
+                    OTP=true
+                } else {
+                    Toast.makeText(this,"Invalid OTP", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun sendVerificationcode(number: String) {
+
+        val options = PhoneAuthOptions.newBuilder(firebaseAuth)
+            .setPhoneNumber(number) // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this) // Activity (for callback binding)
+            .setCallbacks(mCallBack)// OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+
+    }
 
     private fun choosePhotoFromGallary() {
         val galleryIntent = Intent(

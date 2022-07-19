@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -76,9 +77,16 @@ class BlockCommentActivity: BaseActivity<ActivityBlockCommentBinding, BlockComme
                         response.data as UserSearchDetailResponse
                     if (getShopAlbumDetailsResponse != null && getShopAlbumDetailsResponse?.data != null) {
                         blockCommentsAdapter=BlockCommentsAdapter(this,getShopAlbumDetailsResponse.data,this)
-                        rv_block.adapter = blockCommentsAdapter
-                    } else {
+                        activityBlockCommentBinding!!.rvBlock.adapter = blockCommentsAdapter
 
+                        activityBlockCommentBinding!!.rvBlock.visibility=View.VISIBLE
+                        activityBlockCommentBinding!!.textView50.visibility= View.GONE
+                        activityBlockCommentBinding!!.imageView58.visibility= View.GONE
+
+                    } else {
+                        activityBlockCommentBinding!!.rvBlock.visibility=View.GONE
+                        activityBlockCommentBinding!!.textView50.visibility= View.VISIBLE
+                        activityBlockCommentBinding!!.imageView58.visibility= View.VISIBLE
                     }
                 } else {
                     showToast(response.throwable?.message!!)
@@ -90,15 +98,21 @@ class BlockCommentActivity: BaseActivity<ActivityBlockCommentBinding, BlockComme
         blockCommentViewModel!!.getCommentBlockList(appPreference.USERID).observe(this, Observer { response ->
             if (response?.data != null) {
                 val commentBlockLists = response.data as commentBlockList
-                if (commentBlockLists != null) {
+                if (commentBlockLists.data != null) {
                     blockedCommentListAdapter=BlockedCommentListAdapter(this,
                         commentBlockLists.data as List<DataItem>,this)
-                        rv_block.adapter = blockedCommentListAdapter
+                    activityBlockCommentBinding!!.rvBlock.visibility= View.VISIBLE
+                    activityBlockCommentBinding!!.rvBlock.adapter = blockedCommentListAdapter
+
+                    activityBlockCommentBinding!!.rvBlock.visibility=View.VISIBLE
+                    activityBlockCommentBinding!!.textView50.visibility= View.GONE
+                    activityBlockCommentBinding!!.imageView58.visibility= View.GONE
+
                 } else {
-                    blockedCommentListAdapter=BlockedCommentListAdapter(this,
-                        commentBlockLists.data as List<DataItem>,this)
-                    rv_block.adapter = blockedCommentListAdapter
-                    showToast("No user blocked")
+                    activityBlockCommentBinding!!.rvBlock.visibility=View.GONE
+                    activityBlockCommentBinding!!.textView50.visibility= View.VISIBLE
+                    activityBlockCommentBinding!!.imageView58.visibility= View.VISIBLE
+
                 }
             } else {
                 showToast(response.throwable?.message!!)
@@ -128,8 +142,9 @@ class BlockCommentActivity: BaseActivity<ActivityBlockCommentBinding, BlockComme
                 if (response?.data != null) {
                     val signupResponse =
                         response.data as SignupResponse
-                    if(signupResponse.message.equals("Comment has been blocked!")){
+                    if(signupResponse.message.equals("Block user details sent successfully!")){
                         Toast.makeText(this, "Blocked  "+name, Toast.LENGTH_SHORT).show()
+
                         getBlockedList()
                     }
                 } else {

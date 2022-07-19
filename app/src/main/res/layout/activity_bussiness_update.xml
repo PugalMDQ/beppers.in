@@ -1626,6 +1626,7 @@
                         android:focusable="true"
                         android:hint="@string/business_description"
                         android:maxLength="120"
+                        android:maxLines="3"
                         android:padding="10dp"
                         android:text="@={businessUpdateViewModel.description}"
                         android:textColor="@android:color/white"

@@ -1,5 +1,6 @@
 package com.mdq.social.ui.searchdetails
 
+
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -10,9 +11,11 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -162,20 +165,39 @@ class SearchDetailsFragment : BaseFragment<FragmentSearchDetailsBinding, SearchD
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    fragmentSearchDetailsBinding?.constraintLayout7?.visibility=View.GONE
-                    fragmentSearchDetailsBinding?.imgBack?.visibility=View.INVISIBLE
-                    fragmentSearchDetailsBinding?.editTextTextPersonName15?.visibility=View.GONE
-                    fragmentSearchDetailsBinding?.textView102?.visibility=View.GONE
-                    fragmentSearchDetailsBinding?.tbSearch?.visibility=View.GONE
-                    imgNotifiction.visibility=View.GONE
+                    fragmentSearchDetailsBinding?.constraintLayout7?.visibility = View.GONE
+                    fragmentSearchDetailsBinding?.imgBack?.visibility = View.INVISIBLE
+                    fragmentSearchDetailsBinding?.editTextTextPersonName15?.visibility = View.GONE
+                    fragmentSearchDetailsBinding?.textView102?.visibility = View.GONE
+                    fragmentSearchDetailsBinding?.tbSearch?.visibility = View.GONE
+
+                    val layoutParams = (fragmentSearchDetailsBinding?.rvGallery?.layoutParams as? MarginLayoutParams)
+                    layoutParams?.setMargins(0, 10, 0, 0)
+                    fragmentSearchDetailsBinding?.rvGallery?.layoutParams = layoutParams
+
+//                    val layoutParams = fragmentSearchDetailsBinding?.rvGallery as RecyclerView.LayoutParams
+//                    layoutParams.setMargins(0, 10, 0, 0)
+//                    fragmentSearchDetailsBinding?.rvGallery?.layoutParams = layoutParams
+//                    fragmentSearchDetailsBinding?.rvGallery?.requestLayout()
+//                    imgNotifiction.visibility = View.GONE
+
                 } else if (dy < 0) {
                     println("Scrolled Upwards")
-                    fragmentSearchDetailsBinding?.constraintLayout7?.visibility=View.VISIBLE
-                    fragmentSearchDetailsBinding?.imgBack?.visibility=View.VISIBLE
-                    fragmentSearchDetailsBinding?.editTextTextPersonName15?.visibility=View.VISIBLE
-                    fragmentSearchDetailsBinding?.textView102?.visibility=View.VISIBLE
-                    fragmentSearchDetailsBinding?.tbSearch?.visibility=View.VISIBLE
-                    imgNotifiction.visibility=View.VISIBLE
+                    fragmentSearchDetailsBinding?.constraintLayout7?.visibility = View.VISIBLE
+                    fragmentSearchDetailsBinding?.imgBack?.visibility = View.VISIBLE
+                    fragmentSearchDetailsBinding?.editTextTextPersonName15?.visibility = View.VISIBLE
+                    fragmentSearchDetailsBinding?.textView102?.visibility = View.VISIBLE
+                    fragmentSearchDetailsBinding?.tbSearch?.visibility = View.VISIBLE
+                    imgNotifiction.visibility = View.VISIBLE
+
+                    val layoutParams = (fragmentSearchDetailsBinding?.rvGallery?.layoutParams as? MarginLayoutParams)
+                    layoutParams?.setMargins(0, 660, 0, 0)
+                    fragmentSearchDetailsBinding?.rvGallery?.layoutParams = layoutParams
+
+//                    val layoutParams = fragmentSearchDetailsBinding?.rvGallery as RecyclerView.LayoutParams
+//                    layoutParams.setMargins(0, 230, 0, 0)
+//                    fragmentSearchDetailsBinding?.rvGallery?.layoutParams = layoutParams
+//                    fragmentSearchDetailsBinding?.rvGallery?.requestLayout()
 
                 } else {
                     println("No Vertical Scrolled")
@@ -384,7 +406,7 @@ class SearchDetailsFragment : BaseFragment<FragmentSearchDetailsBinding, SearchD
                             }
                         }
                     } else {
-                        showToast("No results found")
+//                        showToast("No results found")
                     }
                 } else {
                     showToast(response.throwable?.message!!)
@@ -552,7 +574,7 @@ class SearchDetailsFragment : BaseFragment<FragmentSearchDetailsBinding, SearchD
                         }
                     } else {
                         if (tab_position != 1) {
-                            showToast("No results found")
+//                            showToast("No results found")
                         }
                     }
                 } else {
@@ -630,7 +652,7 @@ class SearchDetailsFragment : BaseFragment<FragmentSearchDetailsBinding, SearchD
                         }
                     } else {
                         if (tab_position == 1) {
-                            showToast("No results found")
+//                            showToast("No results found")
                         }
                     }
                 } else {

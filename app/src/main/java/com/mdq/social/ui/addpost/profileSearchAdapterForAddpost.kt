@@ -45,7 +45,7 @@ RecyclerView.Adapter<profileSearchAdapterForAddpost.ProHolder>() {
                 holder.getBinding().imageView41.setImageDrawable(context.resources.getDrawable(R.drawable.user))
             }
             holder.getBinding().textView114.setText(userItem?.get(position)?.name)
-            holder.getBinding().textView115.setText(userItem?.get(position)?.description)
+            holder.getBinding().textView115.setText(userItem?.get(position)?.user_name)
             holder.itemView.setOnClickListener {
                 clicks.onItemClick(
                     userItem?.get(position)?.id!!,

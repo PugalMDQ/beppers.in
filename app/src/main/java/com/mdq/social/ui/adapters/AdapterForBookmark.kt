@@ -15,14 +15,13 @@ import com.bumptech.glide.Glide
 import com.github.siyamed.shapeimageview.CircularImageView
 import com.mdq.social.R
 import com.mdq.social.app.data.response.bookmarklist.BookmarkListItem
-import com.mdq.social.app.data.response.getshopAlbumDetails.DataItemes
-import com.mdq.social.app.data.response.recent.DataItem
 import com.mdq.social.ui.home.SliderAdapter2
 import com.mdq.social.ui.post.PostActivity
 import com.mdq.social.ui.profile.ProfileActivity
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
+import pl.droidsonroids.gif.GifImageView
 
 class AdapterForBookmark(
     var context: Context,
@@ -34,6 +33,8 @@ class AdapterForBookmark(
 ) : RecyclerView.Adapter<AdapterForBookmark.mine>() {
 
     interface like {
+        fun sharing(postid: String)
+
         fun likeFromSearchPost(
             id: String,
             user_id: String,
@@ -41,7 +42,8 @@ class AdapterForBookmark(
             no_of_like: String,
             position: Int,
             active: String,
-            textView:TextView?
+            textView:TextView?,
+            githeart: GifImageView?
         )
 
         fun hide(postid: String, who: String)
@@ -136,6 +138,11 @@ class AdapterForBookmark(
                         trendingItem!!.get(position)?.user_id
                     )
                 )
+            }
+                //sharing
+            //sharing
+            holder.share?.setOnClickListener {
+                likes.sharing(trendingItem!!.get(position).id.toString())
             }
 
 
@@ -238,7 +245,8 @@ class AdapterForBookmark(
                     trendingItem!!.get(position).active!!
                 } else {
                     "0"
-                },holder.Likecount
+                },holder.Likecount,
+                holder.heart
             )
         }
         holder.imageView59?.setOnClickListener {
@@ -303,6 +311,7 @@ class AdapterForBookmark(
         var stare: TextView? = null
         var rating: TextView? = null
         var cardformuteAndUnmute: CardView? = null
+        var heart:GifImageView?=null
 
         init {
             img = itemView.findViewById(R.id.imgP)
@@ -312,6 +321,7 @@ class AdapterForBookmark(
             desc = itemView.findViewById(R.id.textView95)
             address = itemView.findViewById(R.id.textView94)
             share = itemView.findViewById(R.id.share)
+            heart = itemView.findViewById(R.id.heart)
             stare = itemView.findViewById(R.id.stare)
             rating = itemView.findViewById(R.id.rating)
             delete = itemView.findViewById(R.id.delete)

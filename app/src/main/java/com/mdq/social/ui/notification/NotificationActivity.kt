@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,34 +45,44 @@ import com.mdq.social.databinding.FragmentNotificationBinding
 import com.mdq.social.ui.Firebase.Constants
 import com.mdq.social.ui.adapters.AdapterForBookmark
 import com.mdq.social.ui.adapters.AdapterForSearchPost
+import com.mdq.social.ui.adapters.AdapterForSharedPost
 import com.mdq.social.ui.adapters.AdapterForTrendingPost
+import com.mdq.social.ui.chat.ChatFragment
+import com.mdq.social.ui.home.HomeActivity
 import com.mdq.social.ui.listOfPost.AdapterForList
 import com.mdq.social.ui.search.TrendingAdapter
 import com.mdq.social.ui.searchdetails.VideoAdapter
 import kotlinx.android.synthetic.main.fragment_notification.*
+import kotlinx.android.synthetic.main.item_home.*
 import org.json.JSONObject
+import pl.droidsonroids.gif.GifDrawable
+import pl.droidsonroids.gif.GifImageView
 import java.lang.reflect.Type
 
 class NotificationActivity : BaseActivity<FragmentNotificationBinding, NotificationNavigator>(),
-    NotificationNavigator,TrendingAdapter.postClick,AdapterForList.like,AdapterForTrendingPost.ClickManager,AdapterForSearchPost.like,VideoAdapter.postClick,AdapterForList.clickManager,NotificationAdapter.readcall,AdapterForBookmark.like{
+    NotificationNavigator,TrendingAdapter.postClick,AdapterForList.like,AdapterForTrendingPost.ClickManager,AdapterForSearchPost.like,VideoAdapter.postClick,AdapterForList.clickManager,NotificationAdapter.readcall,AdapterForBookmark.like,AdapterForSharedPost.ClickManager{
     private var notificationViewModel: NotificationViewModel? = null
     private var fragmentNotificationBinding: FragmentNotificationBinding? = null
     private var notificationAdapter: NotificationAdapter? = null
     private var adapterForTrendingPost: AdapterForTrendingPost? = null
     private var adapterForSearchPost: AdapterForSearchPost? = null
     private var adapterForBookmark: AdapterForBookmark? = null
+    private var adapterForSharedPost: AdapterForSharedPost? = null
     private var galleryAdapter: VideoAdapter? = null
     private var from: String? = ""
     private var fromBook: String? = ""
     private var fromPost: String? = ""
     private var search: String? = ""
     private var city: String? = ""
+    private var PostID: String? = ""
     private var area: String? = ""
     private var category: String? = ""
+    private var sharedPost: String? = ""
     private var fromPostsearch: String? = ""
     private var fromPostfilter: String? = ""
     private var position: Int? =null
     private var User_id: String? = ""
+    var boolean:Boolean=false
     var linearLayoutManager: LinearLayoutManager?=null
     var adapterForList: AdapterForList?=null
     private var preferenceManager: PreferenceManager?=null
@@ -123,7 +137,9 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
         val type: Type = object : TypeToken<List<DataItemes?>?>() {}.getType()
 
         try {
+
             from = intent!!.extras!!.getString("ProfileAdapter").toString()
+            sharedPost = intent!!.extras!!.getString("sharedPost").toString()
             fromBook = intent!!.extras!!.getString("BookmarkAdapter")
             fromPost = intent!!.extras!!.getString("PostAdapter").toString()
             fromPostsearch = intent!!.extras!!.getString("SearchPost").toString()
@@ -135,11 +151,23 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
             category=intent!!.extras!!.getString("category")
             User_id = intent!!.extras!!.getString("user_id").toString()
             listPrivate = Gson().fromJson(intent.getStringExtra("private_list"), type)
+            if(!sharedPost.isNullOrEmpty() && !sharedPost.equals(null)){
+                boolean=true
+            }
         }catch (e:Exception){
 
         }
 
-        if(from!!.equals("ProfileAdapter")){
+        if(boolean){
+            fragmentNotificationBinding?.title?.visibility=View.VISIBLE
+            fragmentNotificationBinding?.title?.setText("Shared Post")
+            fragmentNotificationBinding?.back?.visibility=View.VISIBLE
+            fragmentNotificationBinding?.rv?.visibility=View.VISIBLE
+            fragmentNotificationBinding?.cons?.visibility=View.GONE
+            img_back.visibility=View.GONE
+            fragmentNotificationBinding?.textView24?.visibility=View.GONE
+            getSharedPost(sharedPost)
+        }else if(from!!.equals("ProfileAdapter")){
             fragmentNotificationBinding?.title?.visibility=View.VISIBLE
             fragmentNotificationBinding?.back?.visibility=View.VISIBLE
             fragmentNotificationBinding?.rv?.visibility=View.VISIBLE
@@ -182,6 +210,31 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
         }else{
             fetchnotification()
         }
+    }
+
+    private fun getSharedPost(sharedPost: String?) {
+
+        notificationViewModel!!.getSharedPost(sharedPost)
+            .observe(this, Observer { response ->
+                if (response?.data != null) {
+                    val recentResponse = response.data as RecentResponse
+                    if (recentResponse != null && recentResponse?.data != null) {
+                        if (recentResponse.data.size != 0) {
+                            adapterForSharedPost = AdapterForSharedPost(this@NotificationActivity, recentResponse.data!!,position!!,this,appPreference.USERID)
+                            fragmentNotificationBinding?.rv?.visibility=View.VISIBLE
+                            fragmentNotificationBinding?.rv?.adapter=adapterForSharedPost
+                            fragmentNotificationBinding?.rv?.layoutManager=linearLayoutManager
+                            fragmentNotificationBinding?.rv?.scrollToPosition(position!!)
+                        } else {
+                            fragmentNotificationBinding?.rv?.visibility=View.GONE
+                        }
+                    } else {
+                        fragmentNotificationBinding?.rv?.visibility=View.GONE
+                    }
+                } else {
+                    showToast(response.throwable?.message!!)
+                }
+            })
     }
 
     private fun getBookmark() {
@@ -333,7 +386,7 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
 
     }
 
-    override fun like(id: String,user_id: String,image:ImageView,no_of_like:String,positions: Int,active:String,textViews: TextView?) {
+    override fun like(id: String,user_id: String,image:ImageView,no_of_like:String,positions: Int,active:String,textViews: TextView?,gifHeart:GifImageView?) {
 
         position=positions
         if(image.getTag().equals("Unliked")) {
@@ -347,6 +400,14 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                         if (addLikeCommentsResponse != null) {
                             if (addLikeCommentsResponse.message.equals("Like added successfully!")) {
                                 image.setImageResource(R.drawable.ic_heart_1fill)
+
+                                gifHeart?.visibility=View.VISIBLE
+                                val gifFromResource = GifDrawable(resources, R.drawable.heart)
+                                gifHeart?.setImageDrawable(gifFromResource)
+                                Handler().postDelayed({
+                                    gifFromResource.stop()
+                                    gifHeart?.visibility=View.INVISIBLE
+                                }, 600)
 
                                 var i = textViews?.text.toString().toInt()
                                 i=i+1
@@ -389,6 +450,12 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
         }
     }
 
+    override fun sharing(postid: String) {
+        this.PostID=postid
+        startActivity(Intent(this@NotificationActivity,HomeActivity::class.java)
+            .putExtra("values",postid))
+    }
+
     override fun onItemLickClick(
         positions: Int,
         imageView32: ImageView,
@@ -396,7 +463,8 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
         recentItem: DataItem,
         active: String,
         no_of_like: String,
-        textViews:TextView?
+        textViews:TextView?,
+        gifHeart: GifImageView?
     ) {
 
         position=positions
@@ -411,6 +479,13 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                         if (addLikeCommentsResponse != null) {
                             if (addLikeCommentsResponse.message.equals("Like added successfully!")) {
 
+                                gifHeart?.visibility=View.VISIBLE
+                                val gifFromResource = GifDrawable(resources, R.drawable.heart)
+                                gifHeart?.setImageDrawable(gifFromResource)
+                                Handler().postDelayed({
+                                    gifFromResource.stop()
+                                    gifHeart?.visibility=View.INVISIBLE
+                                }, 600)
 
                                 var i = textViews?.text.toString().toInt()
                                 i=i+1
@@ -500,7 +575,8 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
         no_of_like: String,
         positions: Int,
         active: String,
-        textViews :TextView?
+        textViews :TextView?,
+        gifHeart: GifImageView?
     ) {
         position=positions
         if(image.getTag().equals("Unliked")) {
@@ -518,6 +594,13 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                                 i=i+1
                                 textViews?.setText(i.toString())
 
+                                gifHeart?.visibility=View.VISIBLE
+                                val gifFromResource = GifDrawable(resources, R.drawable.heart)
+                                gifHeart?.setImageDrawable(gifFromResource)
+                                Handler().postDelayed({
+                                    gifFromResource.stop()
+                                    gifHeart?.visibility=View.INVISIBLE
+                                }, 600)
                                 image.setImageResource(R.drawable.ic_heart_1fill)
                                 prepareNotificationMessage(user_id.toString(),appPreference.USERID,appPreference.USERNAME)
                                 insertNotification(id.toString(),user_id,appPreference.USERNAME)
@@ -623,6 +706,7 @@ class NotificationActivity : BaseActivity<FragmentNotificationBinding, Notificat
                             data.add(getShopAlbumDetailsResponse?.data.get(i))
                         }
                     }
+
                     adapterForSearchPost=
                         AdapterForSearchPost(this,data,position,this,appPreference.USERID,"filter")
                     fragmentNotificationBinding?.rv?.adapter =

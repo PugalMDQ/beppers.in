@@ -86,7 +86,7 @@ class ResetPasswordActivity: BaseActivity<ActivityResetPasswordBinding, ForgotPa
 
     override fun loginVerify(status: Int) {
         if (status==3){
-            if (forgotPasswordViewModel?.password?.get().isNullOrEmpty()!=forgotPasswordViewModel?.createPassword?.get().isNullOrEmpty()) {
+            if (!forgotPasswordViewModel?.password?.get().toString().equals(forgotPasswordViewModel?.createPassword?.get().toString())) {
                 showToast(getString(R.string.Password_does_not_match))
                 return
             }

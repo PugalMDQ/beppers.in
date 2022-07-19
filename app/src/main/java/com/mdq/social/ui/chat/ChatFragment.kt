@@ -16,13 +16,13 @@ import com.mdq.social.R
 import com.mdq.social.app.data.response.livechat.ChatCount
 import com.mdq.social.app.data.response.livechat.count
 import com.mdq.social.app.data.response.livechatprofile.DataItem
+import com.mdq.social.app.data.response.livechatprofile.LiveChatProfileResponse
 import com.mdq.social.app.data.viewmodels.base.BaseViewModel
 import com.mdq.social.app.data.viewmodels.chat.ChatViewModel
 import com.mdq.social.base.BaseFragment
 import com.mdq.social.databinding.FragmentChatBinding
 import com.mdq.social.ui.home.HomeActivity
 import kotlinx.android.synthetic.main.fragment_chat.*
-import com.mdq.social.app.data.response.livechatprofile.LiveChatProfileResponse
 
 class ChatFragment : BaseFragment<FragmentChatBinding, ChatNavigator>(),
     TextWatcher, RecentChatAdapter.click {
@@ -36,6 +36,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatNavigator>(),
     var textview1: TextView? = null
     var handler: Handler? = null
     var stop: Boolean = true
+    var values: Boolean = false
+    public var strtext:String ? =null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_chat
@@ -59,6 +61,15 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatNavigator>(),
         super.onViewCreated(view, savedInstanceState)
         fragmentChatBinding = getViewDataBinding()
         fragmentChatBinding?.chatViewModel = chatViewModel
+
+        try {
+            strtext = requireArguments().getString("edttext")
+            if(!strtext.isNullOrEmpty()){
+                values=true
+            }
+        }catch (e:Exception){
+
+        }
 
         if (!appPreference.ADMINBLOCK.equals("1")) {
             fetchUsers()
@@ -103,6 +114,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatNavigator>(),
                         appPreference.FIREBASEUSERID,
                         this,
                         countdatas,
+                        values,
+                        strtext
 
                         )
                 fragmentChatBinding?.rvRechat?.adapter = recentChatAdapter
@@ -157,7 +170,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatNavigator>(),
                             appPreference.USERNAME,
                             appPreference.FIREBASEUSERID,
                             this,
-                            response.data
+                            response.data,
+                            values,strtext
                         )
                         fragmentChatBinding?.rvRechat?.adapter = recentChatAdapter
                     }
